@@ -16,6 +16,10 @@ public class Receiver {
 
     public void receiveMessage(String message) {
         TerminalData terminalData = analogService.getTerminalData(message);
+        if (terminalData == null) {
+            System.out.println("此数据不存在");
+            return;
+        }
         System.out.println("推送数据:" + terminalData);
         String json = JSON.toJSONString(terminalData);
         //整合websocket后推送到客户端
