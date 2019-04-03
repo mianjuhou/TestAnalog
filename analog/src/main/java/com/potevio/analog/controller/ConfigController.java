@@ -44,11 +44,9 @@ public class ConfigController {
      * 添加一项配置后返回所有配置数据
      */
     @RequestMapping("/add")
-//    public Result add(@RequestBody ConfigData data) {
-    public Result add(@RequestBody String dataJson) {
+    public Result add(@RequestBody ConfigData data) {
 //    public Result add(ConfigData data) {
         try {
-            ConfigData data = JSON.parseObject(dataJson, ConfigData.class);
             List<ConfigData> configs = configService.addConfig(data);
             if (configs == null) {
                 return new Result(false, StatusCode.ERROR, "添加失败");
