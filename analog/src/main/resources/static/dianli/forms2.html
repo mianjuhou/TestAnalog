@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Electricity Test</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Expires" content="0">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Cache-control" content="no-cache">
+        <meta http-equiv="Cache" content="no-cache">
+
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- jQuery UI -->
+        <link href="css/jquery-ui.css" rel="stylesheet" media="screen">
+
+        <!-- 用的Bootstrap+jquery -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- styles -->
+        <link href="css/styles.css" rel="stylesheet">
+
+        <link href="css/font-awesome.css" rel="stylesheet">
+        <link href="vendors/form-helpers/css/bootstrap-formhelpers.min.css"
+              rel="stylesheet">
+        <link href="vendors/select/bootstrap-select.min.css" rel="stylesheet">
+        <link href="vendors/tags/css/bootstrap-tags.css" rel="stylesheet">
+
+        <link href="css/forms.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+        <style type="text/css">
+            table {
+                table-layout: fixed;
+            }
+
+
+            td {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+
+            }
+
+            div.IPDiv {
+                background: #ffffff;
+                width: 120;
+                font-size: 9pt;
+                text-align: center;
+                border: 2 ridge threedshadow;
+                border: inset threedhighlight;
+                border-bottom: inset threedhighlight;
+                height: 30;
+            }
+
+            input.IPInput {
+                width: 24;
+                font-size: 9pt;
+                text-align: center;
+                border-width: 0;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+        <form action="" method="post">
+
+            <div class="header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <!-- Logo -->
+                            <div class="logo">
+                                <h1>
+                                    <a href="form2.html"><sup>230</sup>电力模拟工具</a>
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-sm-offset-5 col-lg-5">
+                                    <div class="input-group form">
+									<span class="input-group-btn">
+										<button class="btn btn-danger" id="toTest" type="button">
+											<!-- cehshiyong -->
+											开始测试
+										</button>
+									</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="col-md-12"
+                             style="text-align: center; line-height: 30px">
+                            <label class="col-sm-8 ">终端列表 </label>
+                            <div class="col-md-4">
+                                <!-- <button class="btn btn-default" type="button">刷新</button> -->
+                                <a href='#' data-rel='collapse'><i
+                                        class="glyphicon glyphicon-refresh"></i></a>
+                            </div>
+                        </div>
+                        <div class="sidebar content-box"
+                             style="display: block; overflow-y: scroll; height: 700px">
+
+                            <table th:each="c,v:${terminals}" id="uetable">
+                                <!-- 是否变灰
+                                    <tr th:style="${c.onlinestate}=='0'?'color:#c0c0c0':''">
+                                        <td width="25px"><input type="checkbox" th:id="${#strings.replace(c.ip,'.','')}" th:value='${c.ip}'></td>
+                                        <td width="50px"><font th:text="${c.ip}"></font>        &nbsp&nbsp</td>
+                                        <td width="50px"><font th:text="${c.imis}"></font></td>
+                                    </tr>-->
+
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="col-md-9">
+
+                        <div class="col-md-12">
+
+                            <div class="content-box-large">
+                                <div class="panel-body">
+
+                                    <label class="col-sm-2 control-label">ip 选择区间</label>
+                                    <div class="col-md-4">
+                                        <!--<input class="form-control ip" id='ip1' placeholder="Text field"
+                                            type="text" name="startip">-->
+                                        <div class='IPDiv' id='ip1'></div>
+                                    </div>
+                                    <label class="col-sm-2 control-label">至</label>
+                                    <div class="col-md-4">
+                                        <!--<input class="form-control" id='ip2' placeholder="Text field" name="endip"
+                                            type="text">-->
+                                        <div class='IPDiv' id='ip2'></div>
+                                    </div>
+                                    <div class="col-md-12" style='height: 10px'></div>
+                                    <label class="col-sm-2 control-label">测试类型</label>
+                                    <div class="col-md-4">
+                                        <input id="call" type="radio" name="testType" value="0" checked>招
+                                        测 <input id="report" type="radio" name="testType" value="1">上
+                                        报
+                                    </div>
+                                    <label class="col-sm-2 control-label">端口号</label>
+                                    <div class="col-md-4">
+                                        <input class="form-control" placeholder="Text field"
+                                               type="text" name="portNum" id='port'>
+                                    </div>
+                                    <div class="col-md-12" style='height: 10px'></div>
+                                    <label class="col-sm-2 control-label">上报数据个数</label>
+                                    <div class="col-md-4">
+                                        <input class="form-control" placeholder="Text field"
+                                               id='reportNum' name="numOfPktsPerTime" type="text">
+                                    </div>
+                                    <label class="col-sm-2 control-label">数据长度</label>
+                                    <div class="col-md-4">
+                                        <input class="form-control" placeholder="Text field"
+                                               id='dataLen' name="dataLength" type="text">
+                                    </div>
+                                    <div class="col-md-12" style='height: 10px'></div>
+                                    <label class="col-sm-2 control-label">ip 地址</label>
+                                    <div class="col-md-4">
+                                        <!--<input class="form-control" placeholder="Text field" id='ip'
+                                            type="text">-->
+                                        <div class='IPDiv' id='ip'></div>
+                                    </div>
+                                    <label class="col-sm-2 control-label">上报 周期</label>
+                                    <div class="col-md-3">
+                                        <input class="form-control" placeholder="Text field"
+                                               id='reportInterVal' name="intervalOfPerTime" type="text">
+                                    </div>
+                                    <label class="col-sm-1 control-label" id="callSpaceL"><sub>秒</sub></label>
+                                    <div class="col-md-12" style='height: 10px'></div>
+                                    <label class="col-sm-2 control-label" id="callSpaceL">招测
+                                        间隔</label>
+                                    <div class="col-md-3">
+                                        <input id="callSpace" class="form-control"
+                                               name="intervalOfPerPkt" placeholder="Text field" type="text">
+
+                                    </div>
+                                    <label class="col-sm-1 control-label" id="callSpaceL"><sub>毫秒</sub></label>
+                                    <label class="col-sm-offset-2 col-sm-2 control-label"
+                                           id="reportSpaceL" style="display: none;">上报 间隔</label>
+                                    <div class="col-md-4">
+                                        <input id="reportSpace" class="form-control"
+                                               style="display: none;" placeholder="Text field" type="text">
+                                    </div>
+                                    <div class="col-md-12" style='height: 10px'></div>
+                                    <!-- <input type="hidden" id="retChose" val=''> -->
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-offset-2 col-md-4">
+                                            <button class="btn btn-info" type="button" id="setRes">配置</button>
+                                        </div>
+                                        <div class="col-sm-offset-2 col-md-4">
+                                            <button class="btn btn-danger" type="reset">重置</button>
+                                            <div class="col-sm-12"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box-large">
+                                <div class="panel-body"
+                                     style="display: block; height: 355px;overflow-y:scroll">
+                                    <label class="col-sm-12 control-label">已配置的规则列表 &nbsp&nbsp <i id='delAll'
+                                                                                                  class='glyphicon glyphicon-remove-sign'></i></label>
+
+                                    <table class='table'>
+                                        <thead>
+                                        <tr>
+                                            <!--<th>终端选择</th>-->
+                                            <th>测试类型</th>
+                                            <th>上报数据包个数</th>
+                                            <th>上报间隔</th>
+                                            <th>数据长度</th>
+                                            <th>端口号</th>
+                                            <!--<th>IP地址</th>-->
+                                            <th>召测间隔</th>
+                                            <!--<th>上报周期</th>-->
+                                            <th>操 作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id='tbody'>
+
+                                        <!--<tr th:each="c,v:${rule}">
+                                            <td class="ues" th:title="${#strings.listJoin(c.ues,',')}" th:text="${#strings.listJoin(c.ues,',')}"></td>
+                                            <td th:text="${c.testType==0?'召测':'上报'}"></td>
+                                            <td th:text="${c.reportNum}"></td>
+                                            <td th:text="${c.reportInterVal}"></td>
+                                            <td th:text="${c.dataSize}"></td>
+                                            <td th:text="${c.port}"></td>
+                                            <td th:text="${c.ip}"></td>
+                                            <td th:text="${c.testType==0?c.callInterVal:''}"></td>
+                                            <td th:text="${c.testType==1?c.reportInterVal:''}"></td>
+                                            <td id='m'><a><i onclick='del(this)'
+                                                    class='glyphicon glyphicon-remove-sign'></i></a> <a><i
+                                                    onclick='ale(this)' class='glyphicon glyphicon-cog'></i></a></td>
+
+                                        </tr> -->
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--  Page content -->
+            <footer>
+                <div class="container">
+
+                    <div class="copy text-center">
+                        Copyright 2019 <a href='#'>potevio</a>
+                    </div>
+
+                </div>
+            </footer>
+        </form>
+
+        <script type="text/javascript" src="js/jquery-2.1.3.js"></script>
+        <script type="text/javascript" src="js/jquery.serializejson.js"></script>
+        <script type="text/javascript" src="js/framework7.min.js"></script>
+        <script language="JScript" for="document" event="onkeydown">
+            if (event.keyCode == 13) event.keyCode = 9;
+        </script>
+        <script language="JScript">
+            var IPlikeInputStr = [];
+            for (var i = 0; i < 4; i++)
+                IPlikeInputStr[i] = "<input class='IPInput' name=IPInput  type=text size=7 maxlength=3 onkeydown='if(event.srcElement.value.length==3||event.keyCode==39)event.keyCode=9'>" + (i == 3 ? "" : ".");
+            $('.IPDiv').append(IPlikeInputStr.join(""));
+        </script>
+        <script type="text/javascript">
+            //第一次终端刷新
+            $.ajax({
+                url: 'http://10.3.93.31:9001/sso/analog/terminals',
+                dataType: 'json',
+                jsonp: '',
+                success: function (data) {
+                    if (data.flag) {
+                        $(data.data).each(function (c, v) {
+                            var color = 'color:black';
+                            var style = "display:inline";
+                            if (v.onlinestate == '0') {
+                                color = 'color:gray';
+                                style = "display:none";
+                            }
+
+
+                            $('#uetable').append("<tr style='" + color + "'><td width='25px'><input type='checkbox' id='a" + v.imsi + "' value='" + v.ip + "' name='ueList' style='" + style + "'></td><td width='50px'><font >" + v.ip + "</font>        &nbsp&nbsp</td><td width='50px'><font >" + v.imsi + "</font></td></tr>'");
+                        });
+                    } else {
+                        alert(data.message);
+                    }
+                }
+            });
+
+
+            $('#toTest').click(function () {
+                var $td = $('#tbody tr').length;
+                if ($td <= 0) {
+                    alert('请设置规则 再开始测试!!!');
+                    return;
+                }
+
+                $.ajax({
+                    url: 'http://10.3.93.31:9001/sso/config/starttest',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.flag) {
+                            alert(data.message);
+                            window.location.href = "run.html";
+                        } else {
+                            alert(data.message);
+                        }
+                    }
+
+
+                })
+
+            })
+
+            $('#delAll').click(function () {
+
+                $.ajax({
+                    url: 'http://10.3.93.31:9001/sso/config/deleteall',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.flag) {
+                            //alert(data.message);
+                            $('#tbody').children().remove();
+                            $('tr').each(function () {
+                                if ($(this).attr('style') != 'color:gray') {
+                                    $(this).children().children('input[type=checkbox]').prop('style', 'display:inline');
+                                    $(this).children().children('input[type=checkbox]').prop('checked', false);
+                                }
+                            })
+
+                        } else {
+                            alert(data.message);
+                        }
+                    }
+
+                })
+
+            })
+
+
+        </script>
+        <script type="text/javascript">
+
+            function ale(a) {
+                alert($(a).parent().parent().attr('class'));
+            }
+
+            // 按选择器清空页面
+            function clear(rule) {
+                $(rule).val('');
+            }
+
+            function del(a) {
+                //页面删除  规则
+                var arr2 = new Array();
+                arr2 = $(a).parent().attr('class').split('\,');
+
+                $(a).parent().parent().parent().remove();
+                $.ajax({
+                    url: 'http://10.3.93.31:9001/sso/config/delete/' + $(a).parent().attr('title'),
+                    contentType: 'application/json;charset=UTF-8',
+                    success: function (data) {
+                        if (data.flag) {
+                            for (var i = 0; i < arr2.length; i++) {
+
+                                $('#' + arr2[i]).prop('style', 'display:inline');
+                                $('#' + arr2[i]).prop('checked', false);
+                                $("input[value='" + arr2[i] + "']").prop('style', 'display:inline');
+                                $("input[value='" + arr2[i] + "']").prop('checked', false);
+                            }
+                            ;alert(data.message);
+                        } else {
+                            alert(data.message)
+                        }
+                    }
+                })
+            }
+
+            function ret(a) {
+                //  规则 回显
+                $(a).parent().parent().prevAll().each(
+                    function (i, data) {
+
+                        var $data = $(data).text();
+                        switch (i) {
+                            case 0:
+                                $('#reportSpace').val($data);
+                                break;
+                            case 1:
+                                $('#callSpace').val($data);
+                                break;
+                            case 2:
+                                $('#reportInterVal').val($data);
+                                break;
+                            case 3:
+                                $('#ip').val($data);
+                                break;
+                            case 4:
+                                $('#dataLen').val($data);
+                                break;
+                            case 5:
+                                $('#reportNum').val($data);
+                                break;
+                            case 6:
+                                $('#port').val($data);
+                                break;
+                            case 7:
+                                $('input[type=radio][value=' + $data + ']').prop(
+                                    'checked', 'true');
+                                break;
+                            default:
+                                //用于回显保存选择的终端   => 修改规则不能 修改选择的终端
+                                $('#retChose').val($data);
+                        }
+                    });
+            }
+        </script>
+        <script type="text/javascript">
+            $('.ues').each(function (c, v) {
+                var arr = new Array();
+                arr = $(v).text().split('\,');
+                if (c % 2 == 0) {
+                    $(v).parent().prop('class', 'danger');
+                } else {
+                    $(v).parent().prop('class', 'success');
+                }
+                ;
+                for (var i = 0; i < arr.length; i++) {
+                    var r = arr[i].replace(new RegExp("\\.", "gm"), '');
+                    $('#' + r).prop('style', 'display:none');
+                }
+            });
+
+            $('tr').each(function () {
+                if ($(this).attr('style') == 'color:#c0c0c0') {
+                    $(this).children().children('input').prop('style', 'display:none')
+                }
+            })
+
+
+            $('#setRes').click(
+                function () {
+                    var flag = true;
+                    var div1 = "";
+                    $('#ip1').children('input').each(function () {
+                        div1 += $(this).val() + ".";
+                    })
+                    div1 = div1.substr(0, div1.length - 1);
+                    var div2 = "";
+                    $('#ip2').children('input').each(function () {
+                        div2 += $(this).val() + ".";
+                    })
+                    div2 = div2.substr(0, div2.length - 1);
+                    var div3 = "";
+                    $('#ip').children('input').each(function () {
+                        div3 += $(this).val() + ".";
+                    })
+                    div3 = div3.substr(0, div3.length - 1);
+                    alert(div1 + " " + div2 + " " + div3)
+                    var $ip1 = div1;
+                    var $ip2 = div2;
+                    var $ret = $('#retChose').val();
+                    var $check = $('input[type=checkbox]:checked').val();
+                    $('input[type=text]').each(function () {
+                        if ($(this).val() == '' && flag) {
+                            if (typeof ($check) == 'undefined') {
+                                if ($(this).attr('id') == 'callSpace' || $(this).attr('id') == 'reportSpace') {
+                                    if ($('#callSpace').val() != $('reportSpace').val()) {
+                                        return;
+                                    }
+                                }
+                                alert('请填写完整规则,再点击配置1');
+                                flag = false;
+                                $(this).focus();
+                            } else {
+                                if ($(this).attr('id') == 'ip1' || $(this).attr('id') == 'ip2') {
+                                    return;
+                                }
+                                if ($(this).attr('id') == 'callSpace' || $(this).attr('id') == 'reportSpace') {
+                                    if ($('#callSpace').val() != $('reportSpace').val()) {
+                                        return;
+                                    }
+                                }
+                                alert('请填写完整规则,再点击配置2' + $(this).attr('id'));
+                                flag = false;
+                                $(this).focus();
+                            }
+                        }
+                        ;
+
+                    });
+                    if (!flag) {
+                        return;
+                    }
+                    ;
+                    if (typeof ($check) == 'undefined' && $ip1 != ''
+                        && $ip2 != '') {
+                        var $json = "{";
+                        $('#tbody').children().remove();
+                        $('input[type=text]').each(function (c, v) {
+                            if ($(this).val() != "") {
+                                switch (c) {
+                                    case 0:
+                                        $json += '"startip" :"' + div1 + '",';
+                                        break;
+                                    case 1:
+                                        $json += '"endip" :"' + div2 + '",';
+                                        break;
+                                    case 2:
+                                        $json += '"portNum" :"' + $(v).val() + '",';
+                                        break;
+                                    case 3:
+                                        $json += '"numOfPktsPerTime" :' + $(v).val() + ",";
+                                        break;
+                                    case 4:
+                                        $json += '"dataLength" :' + $(v).val() + ",";
+                                        break;
+                                    case 5:
+                                        $json += '"localIp" : "' + div3 + '",';
+                                        break;
+                                    case 6:
+                                        $json += '"intervalOfPerTime" :' + $(v).val() + ",";
+                                        break;
+                                    case 7:
+                                        $json += '"testType" : 0,';
+                                        $json += '"intervalOfPerPkt" :' + $(v).val() + "}";
+                                        break;
+                                }
+                                ;
+
+                            }
+                        });
+                        $.ajax({
+                            url: 'http://10.3.93.31:9001/sso/config/add',
+                            type: 'post',
+                            contentType: 'application/json;charset=UTF-8',
+                            data: $json,
+                            success: function (data) {
+
+
+                                if (data.flag) {
+
+                                    $.each(data.data, function (c, v) {
+                                        var $type = "";
+                                        var list2 = new Array();
+                                        $.each(v.ueList, function (c1, v1) {
+                                            list2.push(v1);
+                                        })
+
+
+                                        if (v.testType == "0") {
+                                            $type = "招测"
+                                        } else {
+                                            $type = "上报"
+                                        }
+                                        ;
+                                        $('#tbody').append("<tr><td>" + $type + "</td><td>" + v.numOfPktsPerTime + "</td><td>" + v.intervalOfPerPkt + "</td><td>" + v.dataLength + "</td><td>" + v.portNum + "</td><td>" + v.intervalOfPerTime + "</td><td id='m' class='" + list2.toString() + "'><a title='" + v.id + "' class='" + list2.toString() + "'><i onclick='del(this)' class='glyphicon glyphicon-remove-sign'></i></a><a><i onclick='ale(this)' class='glyphicon glyphicon-cog'></i></a></td></tr>")
+
+                                        for (var i = 0; i < list2.length; i++) {
+
+                                            $("input[value='" + list2[i] + "']").prop('style', 'display:none');
+                                        }
+
+                                    })
+                                    alert(data.message);
+                                } else {
+                                    alert(data.message);
+                                }
+
+                            }
+
+
+                        });
+
+
+                    } else if (typeof ($check) != 'undefined' && $ip1 == ''
+                        && $ip2 == '') {
+                        alert('选择配置');
+                        $('#tbody').children().remove();
+                        //test
+                        var $json = "{";
+                        //$('form').prop('action', 'http://10.3.93.31/sso/config/add').submit();
+                        //$('input[tyep=checkbox]:checked').prop('style','display:none');
+                        $json += '"ueList":[';
+                        var list = new Array();
+                        $('input[type=checkbox]:checked').each(function () {
+                            $json += "'" + $(this).val() + "',";
+                            list.push($(this).attr('id'));
+                        });
+
+                        $json.substr(0, $json.length - 1);
+                        $json += '],';
+                        $('input[type=text]').each(function (c, v) {
+                            if ($(this).val() != "") {
+                                switch (c) {
+                                    case 0:
+                                        $json += '"startip" :"' + div1 + '",';
+                                        break;
+                                    case 1:
+                                        $json += '"endip" :"' + div2 + '",';
+                                        break;
+                                    case 2:
+                                        $json += '"portNum" :"' + $(v).val() + '",';
+                                        break;
+                                    case 3:
+                                        $json += '"numOfPktsPerTime" :' + $(v).val() + ",";
+                                        break;
+                                    case 4:
+                                        $json += '"dataLength" :' + $(v).val() + ",";
+                                        break;
+                                    case 5:
+                                        $json += '"localIp" :"' + div3 + '",';
+                                        break;
+                                    case 6:
+                                        $json += '"intervalOfPerTime" :' + $(v).val() + ",";
+                                        break;
+                                    case 7:
+                                        $json += '"testType" : 0,';
+                                        $json += '"intervalOfPerPkt" :' + $(v).val() + "}";
+                                        break;
+                                }
+                                ;
+
+                            }
+                            ;
+                        });
+
+                        $.ajax({
+                            url: 'http://10.3.93.31:9001/sso/config/add',
+                            type: 'post',
+                            contentType: 'application/json;charset=UTF-8',
+                            data: $json,
+                            success: function (data) {
+
+
+                                if (data.flag) {
+
+                                    $.each(data.data, function (c, v) {
+                                        var $type = "";
+                                        var list3 = new Array();
+                                        $.each(v.ueList, function (c1, v1) {
+                                            list3.push(v1);
+                                        })
+
+                                        if (v.testType == "0") {
+                                            $type = "招测"
+                                        } else {
+                                            $type = "上报"
+                                        }
+                                        ;
+                                        $('#tbody').append("<tr><td>" + $type + "</td><td>" + v.numOfPktsPerTime + "</td><td>" + v.intervalOfPerPkt + "</td><td>" + v.dataLength + "</td><td>" + v.portNum + "</td><td>" + v.intervalOfPerTime + "</td><td id='m' class='" + list3.toString() + "'><a title='" + v.id + "' class='" + list.toString() + "'><i onclick='del(this)' class='glyphicon glyphicon-remove-sign'></i></a><a><i onclick='ale(this)' class='glyphicon glyphicon-cog'></i></a></td></tr>")
+
+                                    });
+                                    for (var i = 0; i < list.length; i++) {
+
+                                        $('#' + list[i]).prop('style', 'display:none');
+                                    }
+                                    alert(data.message)
+                                } else {
+                                    alert(data.message)
+                                }
+                            }
+                        });
+
+                    } else {
+                        alert('请选择一种配置');
+                    }
+
+                    //$('form').prop('action','').submit();
+                })
+            $('#toTest').click(function () {
+
+            })
+
+            $('#port').blur(function () {
+
+                var x = $(this).val();
+                if (x > 65535 || x < 0) {
+                    $(this).focus();
+                    alert('端口号非法')
+                }
+
+            })
+
+            window.onload = function () {
+                //your code
+
+
+                $.ajax({
+                    url: 'http://10.3.93.31:9001/sso/config/getall',
+                    contentType: 'application/json;charset=UTF-8',
+                    success: function (data) {
+                        if (data.flag) {
+
+                            $.each(data.data, function (c, v) {
+                                var $type = "";
+                                var list3 = new Array();
+                                $.each(v.ueList, function (c1, v1) {
+                                    list3.push(v1);
+                                })
+
+
+                                if (v.testType == "0") {
+                                    $type = "招测"
+                                } else {
+                                    $type = "上报"
+                                }
+                                ;
+                                $('#tbody').append("<tr><td>" + $type + "</td><td>" + v.numOfPktsPerTime + "</td><td>" + v.intervalOfPerPkt + "</td><td>" + v.dataLength + "</td><td>" + v.portNum + "</td><td>" + v.intervalOfPerTime + "</td><td id='m' class='" + list3.toString() + "'><a title='" + v.id + "' class='" + list3.toString() + "'><i onclick='del(this)' class='glyphicon glyphicon-remove-sign'></i></a><a><i onclick='ale(this)' class='glyphicon glyphicon-cog'></i></a></td></tr>")
+
+                                for (var i = 0; i < list3.length; i++) {
+
+                                    $('input[type=checkbox][value="' + list3[i] + '"]').prop('style', 'display:none');
+                                }
+
+                            });
+
+                            //alert(data.message)
+                        } else {
+                            alert(data.message)
+                        }
+                    }
+                });
+
+
+            }
+
+
+        </script>
+        <script type="text/javascript">
+            $('#call').click(function () {
+                $('#reportSpace').val('');
+                $('#reportSpace').prop('style', 'display:none');
+                $('#reportSpaceL').prop('style', 'display:none');
+                $('#callSpace').prop('style', 'display:block');
+                $('#callSpaceL').prop('style', 'display:block');
+            });
+            $('#report').click(function () {
+                $('#callSpace').val('');
+                $('#callSpace').prop('style', 'display:none');
+                $('#callSpaceL').prop('style', 'display:none');
+                $('#reportSpace').prop('style', 'display:block');
+                $('#reportSpaceL').prop('style', 'display:block');
+            });
+        </script>
+        <script type="text/javascript">
+            var websocket = null;
+
+            //判断当前浏览器是否支持WebSocket
+            if ('WebSocket' in window) {
+                websocket = new WebSocket("ws://10.3.93.31:9001/sso/websocket");
+            } else {
+                alert('Not support websocket')
+            }
+
+            //连接发生错误的回调方法
+            websocket.onerror = function () {
+                alert("socket 出现问题");
+            };
+
+            //连接成功建立的回调方法
+            websocket.onopen = function (event) {
+                //alert("socket 建立成功");
+            }
+
+            //接收到消息的回调方法
+            websocket.onmessage = function (event) {
+
+                setMessageInnerHTML(event.data);
+            }
+
+            //连接关闭的回调方法
+            websocket.onclose = function () {
+                //alert("socket 出现问题");
+                //setMessageInnerHTML("close");
+            }
+
+            //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+            window.onbeforeunload = function () {
+                websocket.close();
+            }
+
+            //将消息显示在网页上
+            function setMessageInnerHTML(data) {
+
+                if (typeof (data) != 'undefined' && data != null && data != "okok") {
+                    //$('#uetable').children().remove();
+                    //alert(data)
+                    var ip = eval("(" + data + ")").ip;
+                    var onlinestate = eval("(" + data + ")").onlinestate;
+                    alert(ip)
+                    if (onlinestate == 1) {
+                        $('input[type=checkbox][value="' + ip + '"]').prop('style', 'display:inline');
+                        $('input[type=checkbox][value="' + ip + '"]').parent().parent().prop('style', 'color:black');
+                    } else {
+                        $('input[type=checkbox][value="' + ip + '"]').prop('style', 'display:none');
+                        $('input[type=checkbox][value="' + ip + '"]').parent().parent().prop('style', 'color:gray');
+                    }
+                }
+            }
+
+            //关闭连接
+            function closeWebSocket() {
+                websocket.close();
+            }
+
+            //发送消息
+            function send() {
+                var message = document.getElementById('text').value;
+                websocket.send(message);
+            }
+        </script>
+
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins)
+        <script src="js/jquery.js"></script> -->
+        <!-- jQuery UI -->
+        <script src="js/jquery-ui.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+
+        <script src="vendors/form-helpers/js/bootstrap-formhelpers.min.js"></script>
+
+        <script src="vendors/select/bootstrap-select.min.js"></script>
+
+        <script src="vendors/tags/js/bootstrap-tags.min.js"></script>
+
+        <script src="vendors/mask/jquery.maskedinput.min.js"></script>
+
+        <script src="vendors/moment/moment.min.js"></script>
+
+        <script src="vendors/wizard/jquery.bootstrap.wizard.min.js"></script>
+
+        <!-- bootstrap-datetimepicker -->
+        <link href="vendors/bootstrap-datetimepicker/datetimepicker.css"
+              rel="stylesheet">
+        <script
+                src="vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
+
+        <link href="css/bootstrap-editable.css" rel="stylesheet"/>
+        <script src="js/bootstrap-editable.min.js"></script>
+
+        <script src="js/custom.js"></script>
+        <script src="js/forms.js"></script>
+
+    </body>
+
+</html>
