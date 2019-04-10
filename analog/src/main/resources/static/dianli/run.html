@@ -201,7 +201,7 @@
                 getting2 = null;
             });
             var getting2 = {
-                url: 'http://10.3.93.31:9001/sso/config/getall',
+                url: 'http://10.3.93.87:9001/sso/config/getall',
                 dataType: 'json',
                 success: function (res) {
                     if (res.flag) {
@@ -230,7 +230,7 @@
 
 
             var getting3 = {
-                url: 'http://10.3.93.31:9001/sso/analog/find',
+                url: 'http://10.3.93.87:9001/sso/analog/find',
                 dataType: 'json',
                 success: function (data) {
 
@@ -273,7 +273,7 @@
             $.ajax(getting3);
 
             var getting4 = {
-                url: 'http://10.3.93.31:9001/sso/analog/find',
+                url: 'http://10.3.93.87:9001/sso/analog/find',
                 dataType: 'json',
                 success: function (data) {
                     if (data.flag) {
@@ -349,7 +349,7 @@
 
             $('#stopTest').click(function () {
                 $.ajax({
-                    url: 'http://10.3.93.31:9001/sso/config/stoptest',
+                    url: 'http://10.3.93.87:9001/sso/config/stoptest',
                     dataType: 'json',
                     success: function (data) {
                         alert(data.message);

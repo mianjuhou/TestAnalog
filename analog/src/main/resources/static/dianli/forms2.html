@@ -270,7 +270,7 @@
 		<script type="text/javascript">
 			//第一次终端刷新
 			$.ajax({
-				url:'http://10.3.93.31:9001/sso/analog/terminals',
+				url:'http://10.3.93.87:9001/sso/analog/terminals',
 				dataType:'json',
 				jsonp:'',
 				success:function(data){
@@ -314,7 +314,7 @@
 				}
 
 				$.ajax({
-					url:'http://10.3.93.31:9001/sso/config/starttest',
+					url:'http://10.3.93.87:9001/sso/config/starttest',
 					dataType:'json',
 					success:function(data){
 						if(data.flag)
@@ -332,7 +332,7 @@
 			$('#delAll').click(function(){
 
 				$.ajax({
-					url:'http://10.3.93.31:9001/sso/config/deleteall',
+					url:'http://10.3.93.87:9001/sso/config/deleteall',
 					dataType:'json',
 					success:function(data){
 						if(data.flag)
@@ -374,7 +374,7 @@
 
 				$(a).parent().parent().parent().remove();
 				$.ajax({
-					url:'http://10.3.93.31:9001/sso/config/delete/'+$(a).parent().attr('title'),
+					url:'http://10.3.93.87:9001/sso/config/delete/'+$(a).parent().attr('title'),
 					contentType: 'application/json;charset=UTF-8',
 					success:function(data){
 						if(data.flag)
@@ -557,7 +557,7 @@
 								}});
 
 							$.ajax({
-								url:'http://10.3.93.31:9001/sso/config/add',
+								url:'http://10.3.93.87:9001/sso/config/add',
 								type:'post',
 								contentType: 'application/json;charset=UTF-8',
 								data:$json,
@@ -600,7 +600,7 @@
 							$('#tbody').children().remove();
 							//test
 							var $json="{";
-							//$('form').prop('action', 'http://10.3.93.31/sso/config/add').submit();
+							//$('form').prop('action', 'http://10.3.93.87/sso/config/add').submit();
 							//$('input[tyep=checkbox]:checked').prop('style','display:none');
 							$json+='"ueList":[';
 							var list = new Array();
@@ -647,7 +647,7 @@
 							});
 
 							$.ajax({
-								url:'http://10.3.93.31:9001/sso/config/add',
+								url:'http://10.3.93.87:9001/sso/config/add',
 								type:'post',
 								contentType: 'application/json;charset=UTF-8',
 								data:$json,
@@ -702,7 +702,7 @@
 
 
 				$.ajax({
-					url:'http://10.3.93.31:9001/sso/config/getall',
+					url:'http://10.3.93.87:9001/sso/config/getall',
 					contentType: 'application/json;charset=UTF-8',
 					success:function(data){
 						if(data.flag){
@@ -760,7 +760,7 @@
 
 			//判断当前浏览器是否支持WebSocket
 			if ('WebSocket' in window) {
-				websocket = new WebSocket("ws://10.3.93.31:9001/sso/websocket");
+				websocket = new WebSocket("ws://10.3.93.87:9001/sso/websocket");
 			} else {
 				alert('Not support websocket')
 			}
