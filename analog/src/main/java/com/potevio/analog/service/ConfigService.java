@@ -5,6 +5,7 @@ import com.potevio.analog.exception.ConditionIsNullException;
 import com.potevio.analog.exception.DuplicateIpException;
 import com.potevio.analog.exception.RightTerminalIsNull;
 import com.potevio.analog.pojo.ConfigData;
+import com.potevio.analog.pojo.ConfigWrapperData;
 import com.potevio.analog.pojo.TerminalData;
 import com.potevio.analog.util.IdWorker;
 import com.potevio.analog.util.IpUtil;
@@ -125,8 +126,10 @@ public class ConfigService {
      */
     public boolean starttest() {
         //把对象转为JSON字符串
-        String json = JSON.toJSONString(configs);
+        ConfigWrapperData configWrapper = new ConfigWrapperData("9999", configs);
+        String json = JSON.toJSONString(configWrapper);
         //使用redis消息队列发送开始命令和配置数据
+        System.out.println("开始测试：" + json);
         stringRedisTemplate.convertAndSend("start_and_stop", json);
         return true;
     }
@@ -138,6 +141,7 @@ public class ConfigService {
      */
     public boolean stoptest() {
         stringRedisTemplate.convertAndSend("start_and_stop", "stop");
+        System.out.println("停止测试");
         return true;
     }
 

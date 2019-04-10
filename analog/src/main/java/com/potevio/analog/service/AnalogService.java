@@ -152,6 +152,9 @@ public class AnalogService {
     }
 
     public TerminalData getTerminalData(String ip) {
+        if (!redisTemplate.hasKey(ip)) {
+            return null;
+        }
         HashOperations ops = redisTemplate.opsForHash();
         List<String> list = ops.multiGet(ip, mkeys);
         if (list == null || list.isEmpty()) {
