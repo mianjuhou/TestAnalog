@@ -1,19 +1,36 @@
 package com.potevio.analog.pojo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "终端数据对象模型")
 public class AnalogData {
-    private String imsi;            //imsi
-    private String ip;              //终端IP
-    private String port;            //端口号
-    private String onlinestate;     //在线状态
-    private String testStatus;      //测试状态
-    private String testTime;        //测试次数
-    private String pktReceivable;   //应收包数
-    private String pktReceived;     //实收包数
-    private String startTime;       //开始时间
-    private String endTime;         //结束时间
-    private String avgDelay;        //平均时延
-    private String maxDelay;        //最大时延
-    private String lastDelay;       //最近一次的时延
+    @ApiModelProperty(value = "终端唯一码", required = true)
+    private String imsi;
+    @ApiModelProperty(value = "终端主键IP", required = true)
+    private String ip;
+    @ApiModelProperty(value = "端口号", required = true)
+    private String port;
+    @ApiModelProperty(value = "在线状态，0:离线，1：在线", required = true)
+    private String onlinestate;
+    @ApiModelProperty(value = "测试状态，0：开始，1：结束", required = true)
+    private String testStatus;
+    @ApiModelProperty(value = "测试次数", required = true)
+    private String testTime;
+    @ApiModelProperty(value = "应收包数", required = true)
+    private String pktReceivable;
+    @ApiModelProperty(value = "实收包数", required = true)
+    private String pktReceived;
+    @ApiModelProperty(value = "开始时间", required = false)
+    private String startTime;
+    @ApiModelProperty(value = "结束时间", required = false)
+    private String endTime;
+    @ApiModelProperty(value = "平均时延", required = false)
+    private String avgDelay;
+    @ApiModelProperty(value = "最大时延", required = false)
+    private String maxDelay;
+    @ApiModelProperty(value = "最近一次的时延", required = false)
+    private String lastDelay;
 
     public String getImsi() {
         return imsi;

@@ -2,6 +2,40 @@
 package com.potevio.analog.util;
 
 public class IpUtil {
+    /**
+     * IP地址转为整形数值
+     */
+    public static long ipToLong(String ips) {
+        String[] arr = ips.split("\\.");
+        long result = 0;
+        for (int i = 0; i <= 3; i++) {
+            long ip = Long.parseLong(arr[i]);
+            result |= ip << ((3 - i) << 3);
+        }
+        return result;
+    }
+
+    /**
+     * 整形数值转为IP地址
+     * @param ip
+     * @return
+     */
+    public static String longToIp(long ip) {
+        StringBuilder sb = new StringBuilder();
+        //直接右移24位
+        sb.append(ip >> 24);
+        sb.append(".");
+        //将高8位置0，然后右移16
+        sb.append((ip & 0x00FFFFFF) >> 16);
+        sb.append(".");
+        //将高16位置0，然后右移8位
+        sb.append((ip & 0x0000FFFF) >> 8);
+        sb.append(".");
+        //将高24位置0
+        sb.append((ip & 0x000000FF));
+        return sb.toString();
+    }
+
     /*验证IP是否属于某个IP段
      * ipSection    IP段（以'-'分隔）
      * ip           所验证的IP号码

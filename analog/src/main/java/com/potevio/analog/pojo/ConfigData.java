@@ -1,23 +1,43 @@
 package com.potevio.analog.pojo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@ApiModel(value = "配置信息对象模型")
 public class ConfigData {
-    private String numOfPktsPerTime;                //每次上报数据包个数
-    private String intervalOfPerTime;               //每次上报间隔
-    private String intervalOfPerPkt;                //每包数据的间隔时间
-    private String portNum;                         //端口号
-    private String testType;                        //测试类型
-    private String dataLength;                      //数据长度
-    private String expireTime;                      //超时时间
-    private String ip;                              //配置的服务端IP,应对多网卡情况
-    private List<String> ueList = new ArrayList<>();//终端ip列表
+    @ApiModelProperty(value = "每次上报数据包个数", notes = "每次上报数据包个数", required = true)
+    private String numOfPktsPerTime;
+    @ApiModelProperty(value = "每次上报间隔", notes = "每次上报间隔", required = true)
+    private String intervalOfPerTime;
+    @ApiModelProperty(value = "每包数据的间隔时间", notes = "每包数据的间隔时间", required = true)
+    private String intervalOfPerPkt;
+    @ApiModelProperty(value = "端口号", notes = "端口号", required = true)
+    private String portNum;
+    @ApiModelProperty(value = "测试类型，0：招测，1：上报", notes = "测试类型，0：招测，1：上报", required = true)
+    private String testType;
+    @ApiModelProperty(value = "数据长度", notes = "数据长度", required = true)
+    private String dataLength;
+    @ApiModelProperty(value = "超时时间", notes = "超时时间", required = true)
+    private String expireTime;
+    @ApiModelProperty(value = "配置的服务端IP,应对多网卡情况", notes = "配置的服务端IP,应对多网卡情况", required = true)
+    private String ip;
+    @ApiModelProperty(value = "终端ip列表，ip段选的方式也会生成次列表", notes = "终端ip列表，ip段选的方式也会生成次列表", required = false)
+    private List<String> ueList = new ArrayList<>();
+    @ApiModelProperty(value = "*召测长度*", required = true)
+    private String callLength;
 
-    private String id;          //配置数据列表的唯一标识IP
-    private String startip;     //开始ip
-    private String endip;       //结束ip
-    private String isfilter;    //如果遇到ip覆盖情况是否过滤掉
+
+    @ApiModelProperty(value = "配置数据列表的唯一标识id，用于删除", required = false)
+    private String id;
+    @ApiModelProperty(value = "段选开始ip", required = false)
+    private String startip;
+    @ApiModelProperty(value = "段选结束ip", required = false)
+    private String endip;
+    @ApiModelProperty(value = "如果遇到ip覆盖情况是否过滤掉，0：不过滤直接返回添加失败，1：直接过滤掉", required = false)
+    private String isfilter;
 
     public String getTestType() {
         return testType;
@@ -25,6 +45,14 @@ public class ConfigData {
 
     public void setTestType(String testType) {
         this.testType = testType;
+    }
+
+    public String getCallLength() {
+        return callLength;
+    }
+
+    public void setCallLength(String callLength) {
+        this.callLength = callLength;
     }
 
     public String getIp() {

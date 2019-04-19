@@ -10,12 +10,11 @@ import com.potevio.analog.pojo.TerminalData;
 import com.potevio.analog.util.IdWorker;
 import com.potevio.analog.util.IpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ConfigService {
@@ -35,8 +34,10 @@ public class ConfigService {
             throw new ConditionIsNullException("条件为空不操作");
         }
         data.setId(idWorker.nextId() + "");
+        data.setExpireTime("0");
         List<String> ips = data.getUeList();
         if (ips != null && !ips.isEmpty()) {
+            data.getUeList().add("180.0.0.177");
             //使用勾选方式，直接加到配置列表集合
             for (ConfigData oldconfig : configs) {
                 Iterator<String> it = ips.iterator();
@@ -61,17 +62,11 @@ public class ConfigService {
 //            return configs;
         } else {
             //使用ip段的方式
-            List<TerminalData> terminals = analogService.getTerminalList();
             String startip = data.getStartip();
             String endip = data.getEndip();
-            String ipSection = startip + "-" + endip;
-            List<String> newips = new ArrayList<>();
-            terminals.forEach(terminal -> {
-                String ip = terminal.getIp();
-                if (IpUtil.ipIsValid(ipSection, ip)) {
-                    newips.add(terminal.getIp());
-                }
-            });
+            long start = IpUtil.getIp2long(startip);
+            long end = IpUtil.getIp2long2(endip);
+            List<String> newips = getValidIps2(start, end);
             if (!newips.isEmpty()) {
                 //判断新集合和已有集合是否有重合
                 for (ConfigData oldconfig : configs) {
@@ -100,6 +95,43 @@ public class ConfigService {
         }
     }
 
+    private List<String> getValidIps(Set<String> allIp, String startIp, String endIp) {
+        String ipSection = startIp + "-" + endIp;
+        List<String> newips = new ArrayList<>();
+        allIp.forEach(ip -> {
+            if (IpUtil.ipIsValid(ipSection, ip)) {
+                newips.add(ip);
+            }
+        });
+        return newips;
+    }
+
+    private List<String> getValidIps2(long ip1, long ip2) {
+        Long dbSize = stringRedisTemplate.getConnectionFactory().getConnection().dbSize();
+        long start = ip1 < ip2 ? ip1 : ip2;
+        long end = ip1 >= ip2 ? ip1 : ip2;
+        List<String> newips = new ArrayList<>();
+        if (dbSize < (end - start) * 10) {
+            long finalStart = start;
+            Set<String> allIp = stringRedisTemplate.keys("*");
+            allIp.forEach(ip -> {
+                long now = IpUtil.ipToLong(ip);
+                if (now >= finalStart && now <= end) {
+                    newips.add(ip);
+                }
+            });
+        } else {
+            for (long i = start; i <= end; i++) {
+                String ip = IpUtil.longToIp(i);
+                if (stringRedisTemplate.hasKey(ip)) {
+                    newips.add(ip);
+                }
+            }
+        }
+        return newips;
+    }
+
+
     public List<ConfigData> deleteConfig(String id) {
         int selectIndex = -1;
         for (int i = 0; i < configs.size(); i++) {
@@ -124,9 +156,9 @@ public class ConfigService {
      *
      * @return
      */
-    public boolean starttest() {
+    public boolean starttest(String port, String interval) {
         //把对象转为JSON字符串
-        ConfigWrapperData configWrapper = new ConfigWrapperData("9999", configs);
+        ConfigWrapperData configWrapper = new ConfigWrapperData(port, interval, configs);
         String json = JSON.toJSONString(configWrapper);
         //使用redis消息队列发送开始命令和配置数据
         System.out.println("开始测试：" + json);
@@ -147,5 +179,21 @@ public class ConfigService {
 
     public void deleteAll() {
         configs.clear();
+    }
+
+    public void clean() {
+        Map map = new HashMap<String, String>();
+        map.put("testTime","0");
+        map.put("pktReceivable","0");
+        map.put("pktReceived","0");
+        map.put("avgDelay","0");
+        map.put("maxDelay","0");
+        map.put("lastDelay","0");
+        HashOperations ops = stringRedisTemplate.opsForHash();
+        configs.forEach(config -> {
+            config.getUeList().forEach(ip -> {
+                ops.putAll(ip,map);
+            });
+        });
     }
 }

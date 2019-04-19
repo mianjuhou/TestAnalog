@@ -1,10 +1,18 @@
 package com.potevio.analog.pojo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "初始页面所有终端列表显示对象模型")
 public class TerminalData {
+    @ApiModelProperty(value = "终端唯一码", required = true)
     private String imsi;
-    private String ip;              //终端IP
-    private String port;            //端口号
-    private String onlinestate;     //在线状态 0掉线 1在线
+    @ApiModelProperty(value = "终端主键IP", required = true)
+    private String ip;
+    @ApiModelProperty(value = "端口号", required = true)
+    private String port;
+    @ApiModelProperty(value = "在线状态，0:离线，1：在线", required = true)
+    private String onlinestate;
 
     public String getImsi() {
         return imsi;
