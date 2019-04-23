@@ -33,11 +33,11 @@ public class ConfigService {
         if (data == null) {
             throw new ConditionIsNullException("条件为空不操作");
         }
+        data.setIsfilter("1");
         data.setId(idWorker.nextId() + "");
         data.setExpireTime("0");
         List<String> ips = data.getUeList();
         if (ips != null && !ips.isEmpty()) {
-            data.getUeList().add("180.0.0.177");
             //使用勾选方式，直接加到配置列表集合
             for (ConfigData oldconfig : configs) {
                 Iterator<String> it = ips.iterator();
@@ -58,8 +58,6 @@ public class ConfigService {
             } else {
                 throw new RightTerminalIsNull("没有符合条件的终端");
             }
-//            configs.add(data);
-//            return configs;
         } else {
             //使用ip段的方式
             String startip = data.getStartip();
