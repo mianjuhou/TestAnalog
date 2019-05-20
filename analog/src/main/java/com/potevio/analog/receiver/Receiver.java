@@ -20,6 +20,7 @@ public class Receiver {
             System.out.println("此数据不存在");
             return;
         }
+        analogService.updateTerminalData(terminalData);
         System.out.println("推送数据:" + terminalData);
         String json = JSON.toJSONString(terminalData);
         //整合websocket后推送到客户端

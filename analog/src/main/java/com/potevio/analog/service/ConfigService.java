@@ -6,19 +6,30 @@ import com.potevio.analog.exception.DuplicateIpException;
 import com.potevio.analog.exception.RightTerminalIsNull;
 import com.potevio.analog.pojo.ConfigData;
 import com.potevio.analog.pojo.ConfigWrapperData;
-import com.potevio.analog.pojo.TerminalData;
-import com.potevio.analog.util.IdWorker;
-import com.potevio.analog.util.IpUtil;
+import com.potevio.analog.pojo.ExcelData;
+import com.potevio.analog.util.*;
+import com.sun.corba.se.spi.orbutil.threadpool.Work;
+import io.swagger.annotations.ApiModelProperty;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 @Service
 public class ConfigService {
     private List<ConfigData> configs = new ArrayList<>();
+
+    private String port;
+    private String interval;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -28,6 +39,17 @@ public class ConfigService {
 
     @Autowired
     private IdWorker idWorker;
+
+
+    public String[] getGlobalPortAndrInterval() {
+        if (this.port != null && this.interval != null) {
+            String[] portinterval = new String[2];
+            portinterval[0] = port;
+            portinterval[1] = interval;
+            return portinterval;
+        }
+        return null;
+    }
 
     public List<ConfigData> addConfig(ConfigData data) {
         if (data == null) {
@@ -53,6 +75,7 @@ public class ConfigService {
                 }
             }
             if (!ips.isEmpty()) {
+                Collections.sort(data.getUeList(), new IpComparator());
                 configs.add(data);
                 return configs;
             } else {
@@ -81,6 +104,7 @@ public class ConfigService {
                     }
                 }
                 if (!newips.isEmpty()) {
+                    Collections.sort(newips, new IpComparator());
                     data.getUeList().addAll(newips);
                     configs.add(data);
                     return configs;
@@ -155,6 +179,8 @@ public class ConfigService {
      * @return
      */
     public boolean starttest(String port, String interval) {
+        this.port = port;
+        this.interval = interval;
         //把对象转为JSON字符串
         ConfigWrapperData configWrapper = new ConfigWrapperData(port, interval, configs);
         String json = JSON.toJSONString(configWrapper);
@@ -181,17 +207,164 @@ public class ConfigService {
 
     public void clean() {
         Map map = new HashMap<String, String>();
-        map.put("testTime","0");
-        map.put("pktReceivable","0");
-        map.put("pktReceived","0");
-        map.put("avgDelay","0");
-        map.put("maxDelay","0");
-        map.put("lastDelay","0");
+        map.put("testTime", "0");
+        map.put("pktReceivable", "0");
+        map.put("pktReceived", "0");
+        map.put("avgDelay", "0");
+        map.put("maxDelay", "0");
+        map.put("lastDelay", "0");
         HashOperations ops = stringRedisTemplate.opsForHash();
         configs.forEach(config -> {
             config.getUeList().forEach(ip -> {
-                ops.putAll(ip,map);
+                ops.putAll(ip, map);
             });
         });
+    }
+
+    public List<ExcelData> getExcelConfig() {
+        if (ExcelFileUtil.INSTANCE.isEmpty()) {//文件为空不读取
+            return null;
+        }
+        XSSFWorkbook workbook = null;
+        try {//文件格式错误不读取
+            workbook = new XSSFWorkbook(ExcelFileUtil.INSTANCE.getExcelFileInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        Sheet sheet = workbook.getSheet("configlist");
+        if (sheet == null) {//不存在configlist的sheet表不读取
+            return null;
+        }
+        //数据不完整的行过滤掉
+        if (sheet.getLastRowNum() == 0) {//sheet中无行数据
+            if (sheet.getRow(0).getLastCellNum() != 9) {
+                return null;
+            }
+        }
+        List<ExcelData> dataList = new ArrayList<>();
+        for (int i = 0; i <= sheet.getLastRowNum(); i++) {
+            Row row = sheet.getRow(i);
+            short cellNum = row.getLastCellNum();
+            if (cellNum == 9) {
+                ExcelData excelData = new ExcelData();
+                for (int j = 0; j < cellNum; j++) {
+                    String value = null;
+                    if (row.getCell(j).getCellType() == CellType.NUMERIC) {
+                        value = String.valueOf((long) row.getCell(j).getNumericCellValue());
+                    } else {
+                        value = row.getCell(j).getStringCellValue();
+                    }
+                    switch (j) {
+                        case 0:
+                            excelData.setId(value);
+                            break;
+                        case 1:
+                            excelData.setNumOfPktsPerTime(value);
+                            break;
+                        case 2:
+                            excelData.setIntervalOfPerTime(value);
+                            break;
+                        case 3:
+                            excelData.setIntervalOfPerPkt(value);
+                            break;
+                        case 4:
+                            excelData.setPortNum(value);
+                            break;
+                        case 5:
+                            excelData.setTestType(value);
+                            break;
+                        case 6:
+                            excelData.setDataLength(value);
+                            break;
+                        case 7:
+                            excelData.setIp(value);
+                            break;
+                        case 8:
+                            excelData.setCallLength(value);
+                            break;
+                    }
+                }
+                dataList.add(excelData);
+            }
+        }
+        if (dataList.isEmpty()) {
+            return null;
+        }
+        return dataList;
+    }
+
+    public List<ExcelData> addExcelConfig(ExcelData data) {
+        data.setId(idWorker.nextId() + "");
+        List<ExcelData> excelDataList = getExcelConfig();
+        if (excelDataList == null) {
+            excelDataList = new ArrayList<>();
+        }
+        excelDataList.add(data);
+        addExcelConfigs(excelDataList);
+        return excelDataList;
+    }
+
+    public List<ExcelData> deleteExcelConfig(String id) {
+        List<ExcelData> excelConfig = getExcelConfig();
+        Iterator<ExcelData> it = excelConfig.iterator();
+        boolean hasRemoved = false;
+        while (it.hasNext()) {
+            ExcelData next = it.next();
+            if (id.equals(next.getId())) {
+                it.remove();
+                hasRemoved = true;
+            }
+        }
+        if (hasRemoved) {
+            addExcelConfigs(excelConfig);
+        }
+        return excelConfig;
+    }
+
+    public void addExcelConfigs(List<ExcelData> datas) {
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("configlist");
+        for (int i = 0; i < datas.size(); i++) {
+            ExcelData data = datas.get(i);
+            Row row = sheet.createRow(i);
+            for (int j = 0; j < 9; j++) {
+                Cell cell = row.createCell(j);
+                switch (j) {
+                    case 0:
+                        cell.setCellValue(data.getId());
+                        break;
+                    case 1:
+                        cell.setCellValue(data.getNumOfPktsPerTime());
+                        break;
+                    case 2:
+                        cell.setCellValue(data.getIntervalOfPerTime());
+                        break;
+                    case 3:
+                        cell.setCellValue(data.getIntervalOfPerPkt());
+                        break;
+                    case 4:
+                        cell.setCellValue(data.getPortNum());
+                        break;
+                    case 5:
+                        cell.setCellValue(data.getTestType());
+                        break;
+                    case 6:
+                        cell.setCellValue(data.getDataLength());
+                        break;
+                    case 7:
+                        cell.setCellValue(data.getIp());
+                        break;
+                    case 8:
+                        cell.setCellValue(data.getCallLength());
+                        break;
+                }
+            }
+        }
+        try {
+            workbook.write(ExcelFileUtil.INSTANCE.getExcelFileOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

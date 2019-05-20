@@ -13,6 +13,16 @@ public class TerminalData {
     private String port;
     @ApiModelProperty(value = "在线状态，0:离线，1：在线", required = true)
     private String onlinestate;
+    @ApiModelProperty(value = "所属基站ID",required = true)
+    private String eNodeBId;
+
+    public String geteNodeBId() {
+        return eNodeBId;
+    }
+
+    public void seteNodeBId(String eNodeBId) {
+        this.eNodeBId = eNodeBId;
+    }
 
     public String getImsi() {
         return imsi;

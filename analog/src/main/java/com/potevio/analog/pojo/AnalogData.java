@@ -31,6 +31,16 @@ public class AnalogData {
     private String maxDelay;
     @ApiModelProperty(value = "最近一次的时延", required = false)
     private String lastDelay;
+    @ApiModelProperty(value = "所属基站ID",required = true)
+    private String eNodeBId;
+
+    public String geteNodeBId() {
+        return eNodeBId;
+    }
+
+    public void seteNodeBId(String eNodeBId) {
+        this.eNodeBId = eNodeBId;
+    }
 
     public String getImsi() {
         return imsi;

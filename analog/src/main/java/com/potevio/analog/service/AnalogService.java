@@ -1,16 +1,14 @@
 package com.potevio.analog.service;
 
 import com.potevio.analog.entity.PageResult;
-import com.potevio.analog.pojo.AnalogData;
-import com.potevio.analog.pojo.ConfigData;
-import com.potevio.analog.pojo.TerminalData;
+import com.potevio.analog.pojo.*;
 import com.potevio.analog.util.IpUtil;
+import com.potevio.analog.util.RequestComparetor;
+import org.apache.logging.log4j.util.Strings;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -35,6 +33,8 @@ public class AnalogService {
     private List<String> mlkeys;
 
     private List<String> mkeys;
+
+    private Map<String, Map<String, TerminalData>> stationInfos = new HashMap<>();
 
     @Autowired(required = false)
     public void setRedisTemplate(RedisTemplate redisTemplate) {
@@ -61,11 +61,13 @@ public class AnalogService {
         mlkeys.add("avgDelay");
         mlkeys.add("maxDelay");
         mlkeys.add("lastDelay");
+        mlkeys.add("eNodeBId");
         mkeys = new ArrayList<>();
         mkeys.add("imsi");
         mkeys.add("ip");
         mkeys.add("port");
         mkeys.add("onlinestate");
+        mkeys.add("eNodeBId");
     }
 
     public List<AnalogData> findRealData() {
@@ -119,6 +121,7 @@ public class AnalogService {
 //        });
         return analogs;
     }
+
 
 //    public List<List<AnalogData>> findRealData() {
 //        HashOperations ops = redisTemplate.opsForHash();
@@ -176,6 +179,7 @@ public class AnalogService {
         return terminals;
     }
 
+
     public List<TerminalData> getTerminalScanList() {
         HashOperations ops = redisTemplate.opsForHash();
         List<TerminalData> terminals = new ArrayList<>();
@@ -202,6 +206,81 @@ public class AnalogService {
             e.printStackTrace();
         } finally {
             return terminals;
+        }
+    }
+
+    /**
+     * 获取基站ID列表
+     *
+     * @return
+     */
+    public List<String> getStationDatas() {
+        if (!stationInfos.isEmpty()) {
+            return new ArrayList<>(stationInfos.keySet());
+        }
+        Set<String> keys = redisTemplate.keys("*");
+        HashOperations ops = redisTemplate.opsForHash();
+        keys.forEach(key -> {
+            List<String> list = ops.multiGet(key, mkeys);
+            String eNodeBId = list.get(4);
+            String ip = list.get(1);
+            TerminalData terminalData = new TerminalData();
+            terminalData.setImsi(list.get(0));
+            terminalData.setIp(ip);
+            terminalData.setPort(list.get(2));
+            terminalData.setOnlinestate(list.get(3));
+            terminalData.seteNodeBId(eNodeBId);
+            if (stationInfos.keySet().contains(eNodeBId)) {
+                stationInfos.get(eNodeBId).put(ip, terminalData);
+            } else {
+                HashMap<String, TerminalData> terminalMap = new HashMap<>();
+                terminalMap.put(ip, terminalData);
+                stationInfos.put(eNodeBId, terminalMap);
+            }
+        });
+        return new ArrayList<>(stationInfos.keySet());
+    }
+
+    /**
+     * 获取基站对应的终端列表
+     *
+     * @param stationId
+     * @return
+     */
+    public List<TerminalData> getTerminalDatas(String stationId) {
+        if (stationInfos.keySet().contains(stationId)) {
+            return new ArrayList<>(stationInfos.get(stationId).values());
+        }
+        Set<String> keys = redisTemplate.keys("*");
+        HashOperations ops = redisTemplate.opsForHash();
+        Map<String, TerminalData> terminalMap = new HashMap<>();
+        keys.forEach(key -> {
+            List<String> list = ops.multiGet(key, mkeys);
+            if (stationId.equals(list.get(4))) {
+                TerminalData terminalData = new TerminalData();
+                terminalData.setImsi(list.get(0));
+                terminalData.setIp(list.get(1));
+                terminalData.setPort(list.get(2));
+                terminalData.setOnlinestate(list.get(3));
+                terminalData.seteNodeBId(list.get(4));
+                terminalMap.put(list.get(1), terminalData);
+            }
+        });
+        stationInfos.put(stationId, terminalMap);
+        return new ArrayList<>(terminalMap.values());
+    }
+
+    public void updateTerminalData(TerminalData data) {
+        if (Strings.isEmpty(data.geteNodeBId())) {
+            return;
+        }
+        if (stationInfos.containsKey(data.geteNodeBId())) {
+            Map<String, TerminalData> terminalMap = stationInfos.get(data.geteNodeBId());
+            terminalMap.put(data.getIp(), data);
+        } else {
+            Map<String, TerminalData> terminalMap = new HashMap<>();
+            terminalMap.put(data.getIp(), data);
+            stationInfos.put(data.geteNodeBId(), terminalMap);
         }
     }
 
@@ -240,6 +319,7 @@ public class AnalogService {
         }
         return new PageResult<>(keys.size(), terminals);
     }
+
 
     public PageResult<TerminalData> getTerminalPageData2(int page, int size) {
         HashOperations ops = redisTemplate.opsForHash();
@@ -372,5 +452,44 @@ public class AnalogService {
             return false;
         }
         return true;
+    }
+
+    public List<RealResponseData> findOrderRealData(RequestOrderData orderData) {
+        HashOperations ops = redisTemplate.opsForHash();
+        List<ConfigData> configs = configService.getAllConfig();
+        List<RealResponseData> responses = new ArrayList<>();
+        RequestComparetor comparetor = new RequestComparetor(orderData);
+        configs.forEach(config -> {
+            RealResponseData realResponseData = config.obtainRealResponseData();
+            List<AnalogData> analogs = new ArrayList<>();
+            config.getUeList().forEach(ip -> {
+                if (redisTemplate.hasKey(ip)) {
+                    List<String> list = ops.multiGet(ip, mlkeys);
+                    AnalogData analogData = new AnalogData();
+                    analogData.setImsi(list.get(0));
+                    analogData.setIp(list.get(1));
+                    analogData.setPort(list.get(2));
+                    analogData.setOnlinestate(list.get(3));
+                    analogData.setTestStatus(list.get(4));
+                    analogData.setTestTime(list.get(5));
+                    analogData.setPktReceivable(list.get(6));
+                    analogData.setPktReceived(list.get(7));
+                    analogData.setStartTime(list.get(8));
+                    analogData.setEndTime(list.get(9));
+                    analogData.setAvgDelay(list.get(10));
+                    analogData.setMaxDelay(list.get(11));
+                    analogData.setLastDelay(list.get(12));
+                    analogs.add(analogData);
+                }
+            });
+            //排序
+            if (comparetor.isNeedOrder()) {
+                Collections.sort(analogs, comparetor);
+            }
+            realResponseData.setAnalogList(analogs);
+            //添加
+            responses.add(realResponseData);
+        });
+        return responses;
     }
 }

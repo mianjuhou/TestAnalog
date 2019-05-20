@@ -4,6 +4,8 @@ import com.potevio.analog.entity.PageResult;
 import com.potevio.analog.entity.Result;
 import com.potevio.analog.entity.StatusCode;
 import com.potevio.analog.pojo.AnalogData;
+import com.potevio.analog.pojo.RealResponseData;
+import com.potevio.analog.pojo.RequestOrderData;
 import com.potevio.analog.pojo.TerminalData;
 import com.potevio.analog.service.AnalogService;
 import io.swagger.annotations.*;
@@ -16,13 +18,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/analog")
 @CrossOrigin
-@Api(value = "终端Controller",tags = "AnalogController") //获取终端信息的控制器
+@Api(value = "终端Controller", tags = "AnalogController") //获取终端信息的控制器
 public class AnalogController {
 
     @Autowired
     private AnalogService service;
 
-    @GetMapping(value = "/terminals")
+    @GetMapping(value = "/scanterminals")
     @ApiOperation(value = "获取所有终端的信息列表")
     @ApiIgnore
     public Result<List<TerminalData>> getTerminalList() {
@@ -41,11 +43,26 @@ public class AnalogController {
         return new Result(true, StatusCode.OK, "获取终端列表", pageData);
     }
 
+    @GetMapping("/stations")
+    @ApiOperation(value = "获取基站列表")
+    public Result<List<String>> getStationDatas() {
+        List<String> stations = service.getStationDatas();
+        return new Result(true, StatusCode.OK, "获取基站列表", stations);
+    }
+
+    @GetMapping("/stations/{id}")
+    @ApiOperation(value = "获取基站下的终端列表")
+    @ApiImplicitParam(paramType = "id", name = "id", value = "基站ID", required = true, dataType = "String")
+    public Result<List<TerminalData>> getTerminalDatas(@PathVariable String id) {
+        List<TerminalData> terminals = service.getTerminalDatas(id);
+        return new Result(true, StatusCode.OK, "获取基站列表", terminals);
+    }
+
     @GetMapping("/terminal/{ip}")
     @ApiOperation(value = "获取单个终端完整信息")
     @ApiImplicitParam(paramType = "query", name = "ip", value = "终端主键IP", required = true, dataType = "String")
     @ApiIgnore
-    public Result<TerminalData> getTerminalDate(@PathVariable String ip) {
+    public Result<TerminalData> getTerminalData(@PathVariable String ip) {
         TerminalData terminal = service.getTerminalData(ip);
         return new Result(true, StatusCode.OK, "获取终端", terminal);
     }
@@ -55,6 +72,13 @@ public class AnalogController {
     public Result<List<AnalogData>> findRealData() {
         List<AnalogData> analogsList = service.findRealData();
         return new Result(true, StatusCode.OK, "获取全部数据成功", analogsList);
+    }
+
+    @PostMapping("/findorder")
+    @ApiOperation(value = "获取已配置终端的实时信息列表,根据条件排序")
+    public Result<List<RealResponseData>> findOrderRealData(RequestOrderData orderData) {
+        List<RealResponseData> orderRealData = service.findOrderRealData(orderData);
+        return new Result(true, StatusCode.OK, "获取全部数据成功", orderRealData);
     }
 
     @GetMapping("/export/{filedir}")

@@ -39,6 +39,14 @@ public class ConfigData {
     @ApiModelProperty(value = "如果遇到ip覆盖情况是否过滤掉，0：不过滤直接返回添加失败，1：直接过滤掉", required = false)
     private String isfilter;
 
+    public RealResponseData obtainRealResponseData() {
+        return new RealResponseData(testType, numOfPktsPerTime, intervalOfPerTime, intervalOfPerPkt, portNum, dataLength, callLength);
+    }
+
+    public ExcelData obtainExcelData() {
+        return new ExcelData(numOfPktsPerTime, intervalOfPerTime, intervalOfPerPkt, portNum, testType, dataLength, ip, callLength);
+    }
+
     public String getTestType() {
         return testType;
     }

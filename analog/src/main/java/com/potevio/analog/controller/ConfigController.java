@@ -3,6 +3,7 @@ package com.potevio.analog.controller;
 import com.potevio.analog.entity.Result;
 import com.potevio.analog.entity.StatusCode;
 import com.potevio.analog.pojo.ConfigData;
+import com.potevio.analog.pojo.ExcelData;
 import com.potevio.analog.service.ConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -15,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/config")
 @CrossOrigin
-@Api(value = "配置信息Controller",tags = "ConfigController") //终端配置信息控制类
+@Api(value = "配置信息Controller", tags = "ConfigController") //终端配置信息控制类
 public class ConfigController {
 
     @Autowired
@@ -69,8 +70,8 @@ public class ConfigController {
     @GetMapping("/starttest/{port}/{interval}")
     @ApiOperation(value = "发出开始测试命令")
     @ApiImplicitParam(paramType = "send", name = "port", value = "端口号", required = true, dataType = "String")
-    public Result starttest(@PathVariable String port,@PathVariable String interval) {
-        boolean ret = configService.starttest(port,interval);
+    public Result starttest(@PathVariable String port, @PathVariable String interval) {
+        boolean ret = configService.starttest(port, interval);
         if (ret) {
             return new Result(true, StatusCode.OK, "开始测试成功");
         } else {
@@ -91,9 +92,45 @@ public class ConfigController {
 
     @GetMapping("/clean")
     @ApiOperation(value = "清空配置终端的数据")
-    public Result clean(){
+    public Result clean() {
         configService.clean();
         return new Result(true, StatusCode.OK, "清空数据成功");
+    }
+
+    @GetMapping("/globalportinterval")
+    @ApiOperation(value = "获取全局端口和全局时间间隔")
+    public Result<String[]> getGlobalPortAndrInterval() {
+        String[] globalPortAndrInterval = configService.getGlobalPortAndrInterval();
+        if (globalPortAndrInterval != null) {
+            return new Result(true, StatusCode.OK, "获取全局端口和时间间隔成功", globalPortAndrInterval);
+        } else {
+            return new Result(false, StatusCode.ERROR, "获取全局端口和时间间隔失败");
+        }
+    }
+
+    @GetMapping("/excelconfig")
+    @ApiOperation(value = "获取Excel文件中的历史配置")
+    public Result<List<ExcelData>> getExcelConfig() {
+        List<ExcelData> list = configService.getExcelConfig();
+        if (list == null) {
+            return new Result(false, StatusCode.ERROR, "数据为空");
+        } else {
+            return new Result(true, StatusCode.OK, "获取数据成功", list);
+        }
+    }
+
+    @PostMapping("/excelconfig")
+    @ApiOperation(value = "向Excel文件中添加一条的历史配置")
+    public Result<List<ExcelData>> addExcelConfig(@RequestBody ExcelData data) {
+        List<ExcelData> list = configService.addExcelConfig(data);
+        return new Result(true, StatusCode.OK, "保存数据成功", list);
+    }
+
+    @DeleteMapping("/excelconfig/{id}")
+    @ApiOperation(value = "删除一条历史配置")
+    public Result<List<ExcelData>> deleteExcelConfig(@PathVariable String id) {
+        List<ExcelData> list = configService.deleteExcelConfig(id);
+        return new Result(true, StatusCode.OK, "数据删除成功", list);
     }
 
 }
