@@ -229,7 +229,7 @@ public class AnalogService {
             terminalData.setIp(ip);
             terminalData.setPort(list.get(2));
             terminalData.setOnlinestate(list.get(3));
-            terminalData.seteNodeBId(eNodeBId);
+            terminalData.setENodeBId(eNodeBId);
             if (stationInfos.keySet().contains(eNodeBId)) {
                 stationInfos.get(eNodeBId).put(ip, terminalData);
             } else {
@@ -262,7 +262,7 @@ public class AnalogService {
                 terminalData.setIp(list.get(1));
                 terminalData.setPort(list.get(2));
                 terminalData.setOnlinestate(list.get(3));
-                terminalData.seteNodeBId(list.get(4));
+                terminalData.setENodeBId(list.get(4));
                 terminalMap.put(list.get(1), terminalData);
             }
         });
@@ -271,16 +271,16 @@ public class AnalogService {
     }
 
     public void updateTerminalData(TerminalData data) {
-        if (Strings.isEmpty(data.geteNodeBId())) {
+        if (Strings.isEmpty(data.getENodeBId())) {
             return;
         }
-        if (stationInfos.containsKey(data.geteNodeBId())) {
-            Map<String, TerminalData> terminalMap = stationInfos.get(data.geteNodeBId());
+        if (stationInfos.containsKey(data.getENodeBId())) {
+            Map<String, TerminalData> terminalMap = stationInfos.get(data.getENodeBId());
             terminalMap.put(data.getIp(), data);
         } else {
             Map<String, TerminalData> terminalMap = new HashMap<>();
             terminalMap.put(data.getIp(), data);
-            stationInfos.put(data.geteNodeBId(), terminalMap);
+            stationInfos.put(data.getENodeBId(), terminalMap);
         }
     }
 
@@ -404,6 +404,7 @@ public class AnalogService {
         terminalData.setIp(list.get(1));
         terminalData.setPort(list.get(2));
         terminalData.setOnlinestate(list.get(3));
+        terminalData.setENodeBId(list.get(4));
         return terminalData;
     }
 

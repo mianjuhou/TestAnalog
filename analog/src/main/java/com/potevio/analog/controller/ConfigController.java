@@ -71,6 +71,10 @@ public class ConfigController {
     @ApiOperation(value = "发出开始测试命令")
     @ApiImplicitParam(paramType = "send", name = "port", value = "端口号", required = true, dataType = "String")
     public Result starttest(@PathVariable String port, @PathVariable String interval) {
+        long leftTime = (System.currentTimeMillis() - configService.stopTime) / 1000;
+        if (leftTime < configService.INTERRUPTTIME) {
+            return new Result(false, StatusCode.ERROR, (configService.INTERRUPTTIME - leftTime) + "秒后才能开始测试");
+        }
         boolean ret = configService.starttest(port, interval);
         if (ret) {
             return new Result(true, StatusCode.OK, "开始测试成功");

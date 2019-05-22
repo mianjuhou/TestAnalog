@@ -2,7 +2,14 @@ package com.potevio.analog.pojo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
+
+/**
+ * 11个
+ * id,numOfPktsPerTime,intervalOfPerTime,intervalOfPerPkt,portNum,testType,dataLength,ip,callLength,batchNum,batchDelay
+ */
+@Data
 @ApiModel(value = "保存到Excel文件中的数据Bean")
 public class ExcelData {
     @ApiModelProperty(value = "主键ID用于删除", notes = "主键ID用于删除", required = true)
@@ -23,28 +30,15 @@ public class ExcelData {
     private String ip;
     @ApiModelProperty(value = "*召测长度*", required = true)
     private String callLength;
-
+    @ApiModelProperty(value = "配置内分批处理时一批的数量", required = false)
+    private String batchNum;
+    @ApiModelProperty(value = "配置内分批处理时间间隔", required = false)
+    private String batchDelay;
 
     public ExcelData() {
     }
 
-    public String getCallLength() {
-        return callLength;
-    }
-
-    public void setCallLength(String callLength) {
-        this.callLength = callLength;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public ExcelData(String numOfPktsPerTime, String intervalOfPerTime, String intervalOfPerPkt, String portNum, String testType, String dataLength, String ip, String callLength) {
+    public ExcelData(String numOfPktsPerTime, String intervalOfPerTime, String intervalOfPerPkt, String portNum, String testType, String dataLength, String ip, String callLength, String batchNum, String batchDelay) {
         this.numOfPktsPerTime = numOfPktsPerTime;
         this.intervalOfPerTime = intervalOfPerTime;
         this.intervalOfPerPkt = intervalOfPerPkt;
@@ -53,61 +47,7 @@ public class ExcelData {
         this.dataLength = dataLength;
         this.ip = ip;
         this.callLength = callLength;
-    }
-
-    public String getNumOfPktsPerTime() {
-        return numOfPktsPerTime;
-    }
-
-    public void setNumOfPktsPerTime(String numOfPktsPerTime) {
-        this.numOfPktsPerTime = numOfPktsPerTime;
-    }
-
-    public String getIntervalOfPerTime() {
-        return intervalOfPerTime;
-    }
-
-    public void setIntervalOfPerTime(String intervalOfPerTime) {
-        this.intervalOfPerTime = intervalOfPerTime;
-    }
-
-    public String getIntervalOfPerPkt() {
-        return intervalOfPerPkt;
-    }
-
-    public void setIntervalOfPerPkt(String intervalOfPerPkt) {
-        this.intervalOfPerPkt = intervalOfPerPkt;
-    }
-
-    public String getPortNum() {
-        return portNum;
-    }
-
-    public void setPortNum(String portNum) {
-        this.portNum = portNum;
-    }
-
-    public String getTestType() {
-        return testType;
-    }
-
-    public void setTestType(String testType) {
-        this.testType = testType;
-    }
-
-    public String getDataLength() {
-        return dataLength;
-    }
-
-    public void setDataLength(String dataLength) {
-        this.dataLength = dataLength;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
+        this.batchDelay = batchDelay;
+        this.batchNum = batchNum;
     }
 }

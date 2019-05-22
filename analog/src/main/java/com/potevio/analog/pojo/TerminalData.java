@@ -2,7 +2,9 @@ package com.potevio.analog.pojo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
+@Data
 @ApiModel(value = "初始页面所有终端列表显示对象模型")
 public class TerminalData {
     @ApiModelProperty(value = "终端唯一码", required = true)
@@ -15,47 +17,7 @@ public class TerminalData {
     private String onlinestate;
     @ApiModelProperty(value = "所属基站ID",required = true)
     private String eNodeBId;
-
-    public String geteNodeBId() {
-        return eNodeBId;
-    }
-
-    public void seteNodeBId(String eNodeBId) {
-        this.eNodeBId = eNodeBId;
-    }
-
-    public String getImsi() {
-        return imsi;
-    }
-
-    public void setImsi(String imsi) {
-        this.imsi = imsi;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public String getPort() {
-        return port;
-    }
-
-    public void setPort(String port) {
-        this.port = port;
-    }
-
-    public String getOnlinestate() {
-        return onlinestate;
-    }
-
-    public void setOnlinestate(String onlinestate) {
-        this.onlinestate = onlinestate;
-    }
-
+    
     @Override
     public String toString() {
         return "TerminalData{" +

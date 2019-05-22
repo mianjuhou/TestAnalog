@@ -3,11 +3,13 @@ package com.potevio.analog.pojo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //招测|上报个数1|上报间隔5|上报周期5000|端口号8899|数据长度71|招测长度20
+@Data
 @ApiModel(value = "测试时返回的实时数据")
 public class RealResponseData {
     @ApiModelProperty(value = "测试类型，0：招测，1：上报", notes = "测试类型，0：招测，1：上报", required = true)
@@ -24,6 +26,10 @@ public class RealResponseData {
     private String dataLength;
     @ApiModelProperty(value = "*召测长度*", required = true)
     private String callLength;
+    @ApiModelProperty(value = "配置内分批处理时一批的数量", required = false)
+    private String batchNum;
+    @ApiModelProperty(value = "配置内分批处理时间间隔", required = false)
+    private String batchDelay;
 
     @ApiModelProperty(value = "排序后的实时数据列表",required = true)
     private List<AnalogData> analogList = new ArrayList<>();
@@ -31,7 +37,7 @@ public class RealResponseData {
     public RealResponseData() {
     }
 
-    public RealResponseData(String testType, String numOfPktsPerTime, String intervalOfPerTime, String intervalOfPerPkt, String portNum, String dataLength, String callLength) {
+    public RealResponseData(String testType, String numOfPktsPerTime, String intervalOfPerTime, String intervalOfPerPkt, String portNum, String dataLength, String callLength, String batchNum, String batchDelay) {
         this.testType = testType;
         this.numOfPktsPerTime = numOfPktsPerTime;
         this.intervalOfPerTime = intervalOfPerTime;
@@ -39,69 +45,7 @@ public class RealResponseData {
         this.portNum = portNum;
         this.dataLength = dataLength;
         this.callLength = callLength;
-    }
-
-    public String getTestType() {
-        return testType;
-    }
-
-    public void setTestType(String testType) {
-        this.testType = testType;
-    }
-
-    public String getNumOfPktsPerTime() {
-        return numOfPktsPerTime;
-    }
-
-    public void setNumOfPktsPerTime(String numOfPktsPerTime) {
-        this.numOfPktsPerTime = numOfPktsPerTime;
-    }
-
-    public String getIntervalOfPerTime() {
-        return intervalOfPerTime;
-    }
-
-    public void setIntervalOfPerTime(String intervalOfPerTime) {
-        this.intervalOfPerTime = intervalOfPerTime;
-    }
-
-    public String getIntervalOfPerPkt() {
-        return intervalOfPerPkt;
-    }
-
-    public void setIntervalOfPerPkt(String intervalOfPerPkt) {
-        this.intervalOfPerPkt = intervalOfPerPkt;
-    }
-
-    public String getPortNum() {
-        return portNum;
-    }
-
-    public void setPortNum(String portNum) {
-        this.portNum = portNum;
-    }
-
-    public String getDataLength() {
-        return dataLength;
-    }
-
-    public void setDataLength(String dataLength) {
-        this.dataLength = dataLength;
-    }
-
-    public String getCallLength() {
-        return callLength;
-    }
-
-    public void setCallLength(String callLength) {
-        this.callLength = callLength;
-    }
-
-    public List<AnalogData> getAnalogList() {
-        return analogList;
-    }
-
-    public void setAnalogList(List<AnalogData> analogList) {
-        this.analogList = analogList;
+        this.batchNum = batchNum;
+        this.batchDelay = batchDelay;
     }
 }
