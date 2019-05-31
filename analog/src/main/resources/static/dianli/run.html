@@ -111,7 +111,7 @@ footer{
 					<div class="content-box-large box-with-header"
 						style="display: block; overflow-y: none;height: 485px; width: 1250px" id='show'
 						>
-						<label class="col-sm-12 control-label">测试列表</label>
+						<label class="col-sm-12 control-label">测试列表<a href="#" id="testuenum"></a></label>
 						<!-- <fieldset th:each="c,v:${rule}" th:title="${#strings.listJoin(c.ues,',')}"> 
 						<legend th:text="'Type:'+${c.testType==0?'召测':'上报'}+'|上报数据包数='+${c.reportNum}+'|上报间隔='+${c.reportInterVal}+'|数据长度='+${c.dataSize}+'|端口号='+${c.port}+${c.testType==0?'|召测间隔'+c.callInterVal:'|上报周期'+c.reportTime}"></legend>
 						<table class='table'>
@@ -215,7 +215,7 @@ footer{
 						 }
 						 $list=v.ueList;
 						 $('#show').append("<fieldset title="+$list.toString()+"><legend>"+
-						 $type+"-上报个数"+v.numOfPktsPerTime+"-上报间隔"+v.intervalOfPerTime+"-上报周期"+v.intervalOfPerPkt+"-端口号"+v.portNum+"-数据长度"+v.dataLength+"-招测长度"+v.callLength+"-分批时延"+v.batchDelay+"-单批数量"+v.batchNum+"</legend><table title="+$list.toString()+" class='table'><thead style='"+style+"'><tr><th>终端ip</th><th>在线状态</th>	<th>测试状态</th><th>测试次数</th><th>应收包数</th><th>实收包数</th><th>平均时延</th><th>速度</th><th>最近时延</th></tr></thead></table></fieldset>");
+						 $type+"-上报个数"+v.numOfPktsPerTime+"-上报间隔"+v.intervalOfPerTime+"-上报周期"+v.intervalOfPerPkt+"-端口号"+v.portNum+"-数据长度"+v.dataLength+"-招测长度"+v.callLength+"-分批时延"+v.batchDelay+"-单批数量"+v.batchNum+"</legend><table title="+$list.toString()+" class='table'><thead style='"+style+"'><tr><th>终端ip</th><th>在线状态</th>	<th>测试状态</th><th>测试次数</th><th>应收包数</th><th>实收包数</th><th>平均时延</th><th>速度</th><th>最近时延</th><th>丢包数</th></tr></thead></table></fieldset>");
 					
 		        	}) }else{
 		        	 	alert(res.message);
@@ -240,6 +240,7 @@ footer{
 			                 	if(myJson.flag){
 			                 		flagg=true;
 			                 		//alert(4);
+									$("#testuenum").text("  "+myJson.data.length);
 			                 	for(var i=0;i<myJson.data.length;i++){
 			                 		//alert(myJson.data[i]);
 			                 		var $ip=myJson.data[i].ip;
@@ -291,6 +292,7 @@ footer{
 			             { "data": "maxDelay" ,"orderable":false},
 			              { "data": "avgDelay" ,"orderable":false},
 			               { "data": "lastDelay" ,"orderable":false},
+						   { "data": "丢包数" },
 			            ]
 			                   	});
 						//alert($('.dataTables_empty').text());
@@ -557,7 +559,10 @@ footer{
 						$json+='"平均时延" :"'+$(v).text()+'",';
 						break;
 					case 8:
-						$json+='"最近时延" :"'+$(v).text()+'"}';
+						$json+='"最近时延" :"'+$(v).text()+'",';
+						break;
+					case 9:
+						$json+='"丢包数" :"'+$(v).text()+'"}';
 						break;
 			};
 			
@@ -701,3 +706,4 @@ footer{
 
 </body>
 
+</html>
