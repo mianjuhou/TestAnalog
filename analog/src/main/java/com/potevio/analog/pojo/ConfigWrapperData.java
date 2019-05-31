@@ -2,12 +2,14 @@ package com.potevio.analog.pojo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 @ApiModel(value = "发送开始命令时包裹配置信息和总端口的对象模型")
 public class ConfigWrapperData {
-
+    private String type;
     @ApiModelProperty(value = "总端口号", required = true)
     private String portNum;
     @ApiModelProperty(value = "总召测间隔", required = true)
@@ -26,30 +28,6 @@ public class ConfigWrapperData {
     public ConfigWrapperData(String portNum, String interval, List<ConfigData> ruleDataArrayList) {
         this.portNum = portNum;
         this.interval = interval;
-        this.ruleDataArrayList = ruleDataArrayList;
-    }
-
-    public String getInterval() {
-        return interval;
-    }
-
-    public void setInterval(String interval) {
-        this.interval = interval;
-    }
-
-    public String getPortNum() {
-        return portNum;
-    }
-
-    public void setPortNum(String portNum) {
-        this.portNum = portNum;
-    }
-
-    public List<ConfigData> getRuleDataArrayList() {
-        return ruleDataArrayList;
-    }
-
-    public void setRuleDataArrayList(List<ConfigData> ruleDataArrayList) {
         this.ruleDataArrayList = ruleDataArrayList;
     }
 }

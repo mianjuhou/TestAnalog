@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+
 import java.util.*;
 
 @Service
@@ -182,6 +183,7 @@ public class ConfigService {
         this.interval = interval;
         //把对象转为JSON字符串
         ConfigWrapperData configWrapper = new ConfigWrapperData(port, interval, configs);
+        configWrapper.setType("start_msg");
         String json = JSON.toJSONString(configWrapper);
         //使用redis消息队列发送开始命令和配置数据
         System.out.println("开始测试：" + json);
@@ -197,7 +199,10 @@ public class ConfigService {
     public boolean stoptest() {
         //开始倒计时
         stopTime = System.currentTimeMillis();
-        stringRedisTemplate.convertAndSend("start_and_stop", "stop");
+        ConfigWrapperData configWrapper = new ConfigWrapperData();
+        configWrapper.setType("stop_msg");
+        String json = JSON.toJSONString(configWrapper);
+        stringRedisTemplate.convertAndSend("start_and_stop", json);
         System.out.println("停止测试");
         return true;
     }
@@ -226,11 +231,11 @@ public class ConfigService {
         return excelConfigDao.getExcelConfig();
     }
 
-    public List<ExcelData> addExcelConfig(ExcelData data){
+    public List<ExcelData> addExcelConfig(ExcelData data) {
         return excelConfigDao.addExcelConfig(data);
     }
 
-    public List<ExcelData> deleteExcelConfig(String id){
+    public List<ExcelData> deleteExcelConfig(String id) {
         return excelConfigDao.deleteExcelConfig(id);
     }
 

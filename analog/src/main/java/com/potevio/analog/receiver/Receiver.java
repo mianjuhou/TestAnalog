@@ -16,13 +16,16 @@ public class Receiver {
 
     public void receiveMessage(String message) {
         TerminalData terminalData = analogService.getTerminalData(message);
+        String json = null;
         if (terminalData == null) {
-            System.out.println("此数据不存在");
-            return;
+            analogService.updateTerminalData(null,message);
+            json = "{}";
+            System.out.println("此数据不存在或已被删除");
+        } else {
+            analogService.updateTerminalData(terminalData,null);
+            json = JSON.toJSONString(terminalData);
+            System.out.println("推送给前端数据:" + json);
         }
-        analogService.updateTerminalData(terminalData);
-        System.out.println("推送数据:" + terminalData);
-        String json = JSON.toJSONString(terminalData);
         //整合websocket后推送到客户端
         try {
             MyWebSocket.sendInfo(json);

@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -270,19 +271,26 @@ public class AnalogService {
         return new ArrayList<>(terminalMap.values());
     }
 
-    public void updateTerminalData(TerminalData data) {
-        if (Strings.isEmpty(data.getENodeBId())) {
-            return;
-        }
-        if (stationInfos.containsKey(data.getENodeBId())) {
-            Map<String, TerminalData> terminalMap = stationInfos.get(data.getENodeBId());
-            terminalMap.put(data.getIp(), data);
-        } else {
-            Map<String, TerminalData> terminalMap = new HashMap<>();
-            terminalMap.put(data.getIp(), data);
-            stationInfos.put(data.getENodeBId(), terminalMap);
-        }
+    public void updateTerminalData(TerminalData data, String ip) {
+        stationInfos.clear();
     }
+//    public void updateTerminalData(TerminalData data, String ip) {
+//        if (!StringUtils.isEmpty(ip)) {
+//            stationInfos.clear();
+//            return;
+//        }
+//        if (Strings.isEmpty(data.getENodeBId())) {
+//            return;
+//        }
+//        if (stationInfos.containsKey(data.getENodeBId())) {
+//            Map<String, TerminalData> terminalMap = stationInfos.get(data.getENodeBId());
+//            terminalMap.put(data.getIp(), data);
+//        } else {
+//            Map<String, TerminalData> terminalMap = new HashMap<>();
+//            terminalMap.put(data.getIp(), data);
+//            stationInfos.put(data.getENodeBId(), terminalMap);
+//        }
+//    }
 
     /**
      * 使用原始方式获取分页终端
