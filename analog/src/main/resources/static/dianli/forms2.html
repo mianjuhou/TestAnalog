@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-control" content="no-cache">
 <meta http-equiv="Cache" content="no-cache">
-
+<meta name="viewport" content="height=device-height, initial-scale=1.0">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- jQuery UI -->
@@ -24,7 +24,7 @@
 	rel="stylesheet">
 <link href="vendors/select/bootstrap-select.min.css" rel="stylesheet">
 <link href="vendors/tags/css/bootstrap-tags.css" rel="stylesheet">
-
+<link rel="stylesheet" type="text/css" href="css/floatPanel.css" />  
 <link href="css/forms.css" rel="stylesheet">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -70,9 +70,12 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 					</div>
 					<div class="col-md-7">
 						<div class="row">
-							<div class="col-sm-offset-5 col-lg-5">
+
+							<div class="col-lg-5">
 								<div class="input-group form">
 									<span class="input-group-btn">
+										
+
 										<button class="btn btn-danger" id="toTest" type="button">
 											<!-- cehshiyong -->
 											开始测试
@@ -85,21 +88,30 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 									</span>
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
 		<div class="page-content">
 			<div class="row">
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				<b>全局端口号:</b>
+				<input type="text" class="form-sm-control" placeholder="请输入全局端口号" id="all1" name="all">
+				<b>全局招测间隔:</b>
+				<input type="text" class="form-sm-control" placeholder="请输入全局招测间隔" id="all2" name="all">
 				<div class="col-md-3">
 					<div class="col-md-12"
 						style="text-align: center; line-height: 30px">
-						<label class="col-sm-8 ">终端列表 </label>
-						<div class="col-md-4">
+
+						<label class="col-md-4 " style="padding-right:0px">ue列表<a id="uenum"></a> </label>
+						
+						<div class="col-md-8" style="height : 30px">
 							<!-- <button class="btn btn-default" type="button">刷新</button> -->
-							<a href='#' data-rel='collapse'><i
-								class="glyphicon glyphicon-refresh"></i></a>
+							<select class="col-md-10" id="enodebs" style="height: 30px"><option value="none">请选择基站</option></select>
+							<input type="checkbox" id="checkall" name="checkall" class="col-md-2">
 						</div>
 					</div>
 					<div class="sidebar content-box"
@@ -115,10 +127,11 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 							
 						</table>
 					</div>
+					<!--4.26 没那么多终端了吧 关掉分页 -->
 					<div class="content-box" style="margin-top :-25px;margin-bottom :0px">
-						<button type="button" id="prevPage" class="btn btn-info" value="-1">上一页</button>
+						<button type="button" id="prevPage" class="btn btn-info" value="-1" disabled="false">上一页</button>
 						<input  style="border-width:0;width:68px;text-align:center" id="page" value="0/0"/>
-						<button type="button" id="nextPage" class="btn btn-info" value="1">下一页</button>
+						<button type="button" id="nextPage" class="btn btn-info" value="1" disabled="false">下一页</button>
 						</div>
 				</div>
 				
@@ -185,7 +198,13 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 									name="intervalOfPerTime"	placeholder="Text field" type="text">
 								</div>
 								<label class="col-sm-1 control-label" id="callSpaceL"><sub>秒</sub></label>
-								
+									<!-- 默认值 -->
+								<label class="col-sm-2 control-label"  >分批时延</label>
+								<div class="col-md-4">
+									<input id="batchDelay" class="form-control"
+									name="batchDelay" type="text" placeholder="Text field">
+								</div>
+
 								<div class="col-md-12" style='height: 10px'></div>
 								<label class="col-sm-2 control-label"
 									id="callLengthL" >招测长度</label>
@@ -193,19 +212,69 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 									<input id="callLength" class="form-control"
 										 placeholder="Text field" type="text">
 								</div>
+								<!-- 默认值 -->
+								<label class="col-sm-2 control-label" 
+									 >单批数量</label>
+								<div class="col-md-4">
+									<input id="batchNum" name="batchNum" class="form-control"
+										 type="text"  placeholder="Text field">
+								</div>
+
 								<div class="col-md-12" style='height: 10px'></div>
 								<!-- <input type="hidden" id="retChose" val=''> -->
 								<div class="col-sm-12">
 									<div class="col-sm-offset-2 col-md-4">
 										<button class="btn btn-info" type="button" id="setRes">配置</button>
+										<button class="btn btn-info" type="button" id="saveConfig">保存配置</button>
 									</div>
 									<div class="col-sm-offset-2 col-md-4">
 										<button class="btn btn-danger" type="reset">重置</button>
+										<button class="btn btn-success" type="button" id="tooldConfig" data-toggle="modal" data-target="#importModal">以往配置</button>
 										<div class="col-sm-12"></div>
 									</div>
 								</div>
 							</div>
 						</div>
+
+						 <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true" >
+					    	<div class="modal-dialog" role="document">
+					        <div class="modal-content" style="width: 700px">
+					          <div class="modal-header">
+					            <h5 class="modal-title" id="exampleModalLabel">导入</h5>
+					          </div>
+					          <div class="modal-body">
+					          	<table class='table'>
+									<thead>
+										<tr>
+											<!--<th>终端选择</th>-->
+											<th></th>
+											<th>测 试 类 型</th>
+											<th>端口号</th>
+											<th>上报数据个数</th>
+											
+											<th>数据长度</th>
+											
+																					
+											<th style="width: 110px">I P 地址  </th>
+											<th>上报周期</th>
+											<th>主动上报间隔/招测间隔</th>
+											<th>召测长度</th>
+											<th>分批时延</th>
+											<th>单批数量</th>
+											<!--<th>上报周期</th>-->
+											<th></th>
+										</tr>
+									</thead>
+									<tfoot><td></td><td></td><td><button type="button" id="huixian" data-dismiss="modal" class="btn-info">应用</button></td><td></td><td></td><td></td><td><button type="button" class="btn-default" id="fanhui" data-dismiss="modal">返回</button></td><td></td><td></td><td></td><td></td></tfoot>
+									<tbody id="oldConfig">
+										
+									</tbody>
+								</table>
+					          </div>
+						      </div>
+						 	 </div>
+						</div>
+
 
 						<div class="content-box-large">
 							<div class="panel-body"
@@ -220,10 +289,13 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 											<th>上报数据个数</th>
 											<th>上报周期</th>
 											<th>数据长度</th>
-											<th>端口号</th>
+											
 											<!--<th>IP地址</th>-->
-											<th>主动上报间隔</th>
-											<th>召测长度</th>
+											<th>端口号</th>
+											<th>主动上报间隔/招测间隔</th>
+											<th>招测长度</th>
+											<th>分批时延</th>
+											<th>单批数量</th>
 											<!--<th>上报周期</th>-->
 											<th>操 作</th>
 										</tr>
@@ -268,9 +340,12 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 	</form>
 
 	<script type="text/javascript" src="js/jquery-2.1.3.js"></script>
+
+	 <script src="js/floatPanel.js" type="text/javascript"></script>
 	<script type="text/javascript" src="js/jquery.serializejson.js"></script>
 	<script type="text/javascript" src="js/framework7.min.js"></script>
     <script language="JScript" for="document" event="onkeydown"> 
+    //ip 输入框
 		if(event.keyCode==13)event.keyCode=9; 
 		</script> 
 		<script language="JScript"> 
@@ -281,14 +356,66 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 	</script>
 	
 	<script type="text/javascript">
-	//第一次终端刷新
+	//4.10第一次终端刷新
+	//4.26第一次基站刷新
 	var pageNum=0;
 	var pageMax=0;
 	var map={};
 	
 	//10.3.93.87
-	
-	$.ajax({
+	$('#checkall').click(function(){
+		
+		if(!$(this).is(':checked')){
+
+			$('#uetable').find('input[type=checkbox]').each(function(c,v){
+			var id=$(this).attr('id');
+		
+			if($(this).is(':checked')&&$(this).attr('style')!='display:none')
+			{
+				delete map[id];
+				$(this).prop('checked',false);
+			}
+			else
+			{
+				
+			}
+		})
+
+		}else{
+		$('#uetable').find('input[type=checkbox]').each(function(c,v){
+			var id=$(this).attr('id');
+		
+			if($(this).attr('style')=='display:none'||$(this).is(':checked'))
+			{
+
+			}
+			else
+			{
+				map[id]=$(this).val();
+				$(this).prop('checked',true);
+			}
+		})
+	}
+	})
+
+	function checkallflag(){
+		
+		$('#uetable').find('input[type=checkbox]').each(function(c,v){
+		if($(this).attr('style')!='display:none'){
+			if($(this).is(':checked')){
+
+			}
+			else{$('#checkall').prop('checked',false);return false;};	
+		}else
+		{
+
+		}
+		
+		$('#checkall').prop('checked',true);
+	})
+	}
+
+	var initUe={
 		url:'http://127.0.0.1:9001/sso/analog/terminalpage/'+pageNum+'/1000',
 		dataType:'json',
 		jsonp:'',
@@ -309,7 +436,7 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 					$('#uetable').append("<tr style='"+color+"'><td width='25px'><input type='checkbox' id='a"+v.imsi+"' value='"+v.ip+"' name='ueList' style='"+style+"'></td><td width='50px'><font >"+v.ip+"</font>        &nbsp&nbsp</td><td width='50px'><font >"+v.imsi+"</font></td></tr>'");
 				});
 			
-				$('input[type=checkbox]').click(function(){
+				$('input[type=checkbox][name!=checkall]').click(function(){
 					var id=$(this).attr('id');
 					if(id in map){
 					delete map[id];
@@ -317,16 +444,106 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 					{
 					map[id]=$(this).val();
 					}
-					})
-			
+					checkallflag();
+				})
+			checkallflag();
 			$('#page').val(pageNum+"/"+pageMax);
 			}else
 			{
 				alert(data.message);
 			}
 		}
-	});
+	};
 	
+function toChangeEnodeb(id){
+	$('#uetable').children().remove();
+	var changeEnodeb = {
+		url:'http://127.0.0.1:9001/sso/analog/stations/'+id,
+		dataType:'json',
+		jsonp:'',
+		success:function(data){
+			if(data.flag){
+				$('#uenum').text(":"+data.data.length);
+				$(data.data).each(function(c,v){
+					var color='color:black';
+					var style="display:inline";
+					if(v.onlinestate=='0')
+					{
+					color='color:gray';
+					style="display:none";
+					}
+					$('#uetable').append("<tr style='"+color+"'><td width='25px'><input type='checkbox' id='a"+v.imsi+"' value='"+v.ip+"' name='ueList' style='"+style+"'></td><td width='50px'><font >"+v.ip+"</font>        &nbsp&nbsp</td><td width='50px'><font >"+v.imsi+"</font></td></tr>'");
+				});
+
+			$.ajax(checkCheckBox);
+			
+			$('input[type=checkbox][name!=checkall]').click(function(){
+					var id=$(this).attr('id');
+					if(id in map){
+					delete map[id];
+					}else
+					{
+					map[id]=$(this).val();
+					}
+					checkallflag();
+					})
+
+			$.each(map,function(c,v){
+				
+			$('#'+c).prop('checked',true);
+			})
+			checkallflag();
+			}else
+			{
+				alert(data.message);
+			}
+		}
+	};
+	$.ajax(changeEnodeb);
+}
+
+	var initEnodeb = {
+		url:"http://127.0.0.1:9001/sso/analog/stations",
+		dataType:'json',
+		jsonp:'',
+		success:function(data){
+			if(data.flag){
+				$('#enodebs').children().remove();
+				$('#enodebs').append('<option value="none">请选择基站</option>');
+				$.each(data.data,function(c,v){
+				$('#enodebs').append('<option value='+v+'>'+v+'</option>');					
+				})
+				$('select').change(function(){
+					
+					if($(this).val()=="none"){
+						return;
+					}
+					
+
+					toChangeEnodeb($(this).val());
+				})
+			}else
+			{alert(data.message);
+			}
+		}
+
+	}
+	$.ajax(initEnodeb);
+
+	var initGlobal={
+		url:'http://127.0.0.1:9001/sso/config/globalportinterval',
+		dataType:'json',
+		success:function(data){
+			if(data.flag){
+				$('#all1').val(data.data[0]);
+				$('#all2').val(data.data[1]);
+
+			}
+		}
+	}
+
+	$.ajax(initGlobal);
+
 	function checkButton(){
 	if(pageNum<=0)
 	{
@@ -345,7 +562,7 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 	$('#nextPage').prop('disabled',false);
 	}
 	}
-	checkButton();
+	//checkButton();
 	
 	function fenye(pageNum){
 	$.ajax({
@@ -370,7 +587,7 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 				});
 			$.ajax(checkCheckBox);
 			
-		$('input[type=checkbox]').click(function(){
+		$('input[type=checkbox][name!=checkall]').click(function(){
 					var id=$(this).attr('id');
 					if(id in map){
 					delete map[id];
@@ -380,6 +597,7 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 					}
 					})
 			$.each(map,function(c,v){
+
 			$('#'+c).prop('checked',true);
 			})
 			$('#page').val(pageNum+"/"+pageMax);
@@ -432,27 +650,204 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 	})
 	
 	
+	$('#tooldConfig').click(function(){
+		$.ajax({
+			url:'http://127.0.0.1:9001/sso/config/excelconfig',
+			contentType: 'application/json;charset=UTF-8',
+			success:function(data){	
+				
+				if(data.flag){
+      			$('#oldConfig').children().remove();
+      			$.each(data.data,function(c,v){
+      				var xxz=v.testType=='1'?"上报":"招测";
+      				$('#oldConfig').append('<tr name='+v.id+'><td><input type="radio" name="radios"></td><td title="'+v.testType+'">'+xxz+'</td><td>'+v.portNum+'</td><td>'+v.numOfPktsPerTime+'</td><td>'+v.dataLength+'</td><td>'+v.ip+'</td><td>'+v.intervalOfPerPkt+'</td><td>'+v.intervalOfPerTime+'</td><td>'+v.callLength+'</td><td>'+v.batchDelay+'</td><td>'+v.batchNum+'</td><td><i onclick="delConfig(this)" class="glyphicon glyphicon-remove-sign"></i></td></tr>');
+      			})
+      			
+				}
+				else
+					{alert(data.message)}
+
+			}					
+		})
+	})
+	
+	function delConfig(d){
+		var $id=$(d).parent().parent().attr('name');
+		$.ajax({
+			url:'http://127.0.0.1:9001/sso/config/excelconfig/'+$id,
+			type: 'delete',
+			contentType: 'application/json;charset=UTF-8',
+			success:function(data){
+				if(data.flag){$(d).parent().parent().remove();$('#fanhui').click();}else{
+					var panel=rePanel(data.message);
+						panel.show();
+						setTimeout(function(){
+							panel.hide();
+						},1500);
+				}
+			}
+		})
 		
+	}	
 		
+	$('#huixian').click(function(){
+		$('input[type=radio][name=radios]:checked').parent().parent().children().each(function(i,data){
+
+			switch(i){
+				case 0:
+				break;
+				case 1:
+				$('input[type=radio][value=' + $(this).attr('title') + ']').prop(
+									'checked', true);
+				break;
+				case 2:
+				$('#port').val($(this).text());
+				break;
+				case 3:
+				$('#reportNum').val($(this).text());
+				break;
+				case 4:
+				$('#dataLen').val($(this).text());
+				break;
+				case 5:
+				var ll=$(this).text().split('\.');
+			$('#ip').children('input').each(function(i,data){
+					if(ll==''||ll==null) return false;
+					//div3+=$(this).val()+".";
+					$(this).val(ll[i]);
+					});
+				break;
+				case 6:
+				$('#reportInterVal').val($(this).text());
+				break;
+				case 7:
+				$('#callSpace').val($(this).text());
+				break;
+				case 8:
+				$('#callLength').val($(this).text());
+				break;
+				case 9:
+				$('#batchDelay').val($(this).text());
+				break;
+				case 10:
+				$('#batchNum').val($(this).text());
+				break;
+				}
+			
+			
+
+	}); })	
 		
-		
 	
+	$('#saveConfig').click(function(){
+		var $type=$('input[type=radio][name=testType]:checked').val();
+		var div3="";
+		$('#ip').children('input').each(function(){
+		if($(this).val()=='') return false;
+		div3+=$(this).val()+".";
+		})
+		div3=div3.substr(0,div3.length-1);
+		var $json="{";
+						
+			$('input[type=text][name!=all]').each(function(c,v){
+			if($(this).val()!="")
+			{
+				//alert(c+" + "+$(v).val());
+			switch(c){
+		case 111:
+			//$json+='"startip" :"'+div1+'",';
+			break;
+		case 444:
+			//$json+='"endip" :"'+div2+'",';
+			break;
+		case 8:
+			$json+='"portNum" :"'+$(v).val()+'",';
+			break;
+		case 9:
+			$json+='"numOfPktsPerTime" :'+$(v).val()+",";
+			break;
+		case 10:
+			$json+='"dataLength" :'+$(v).val()+",";
+			break;
+		case 11:
+			$json+='"ip" : "'+div3+'",';
+			break;
+		case 15:
+			$json+='"intervalOfPerPkt" :'+$(v).val()+",";
+			break;
+		case 16:
+			$json+='"testType" : '+ $type +',';
+			$json+='"intervalOfPerTime" :'+$(v).val()+",";
+			break;
+		case 18:
+			$json+='"callLength" :"'+$(v).val()+'",';
+			break;
+		case 17:
+			$json+='"batchDelay" :"'+$(v).val()+'",';
+			break;
+		case 19:
+		$json+='"batchNum" :"'+$(v).val()+'"}';
+		break;
+		};
+	}})
+			console.log($json);
+			$.ajax({
+				url:'http://127.0.0.1:9001/sso/config/excelconfig',
+				type:'post',
+				contentType: 'application/json;charset=UTF-8',
+				data:$json,
+				success:function(data){
+					if(data.flag){
+						//alert(1);
+						//alert(data.message)
+						var p=data.message;
+						var panel=rePanel(p);
+						panel.show();
+						setTimeout(function(){
+							panel.hide();
+						},1500);
+					}else{
+						alert(data.message)
+					}
+				}
+
+			})
+	})
 	
-	
-	
-	
+	function rePanel(p){
+		return FloatPanel('panel').set({
+                header: {
+                	enabled: false,
+                    content: "这是标题",
+                },
+                body:{
+                	content:p,
+                },
+                 footer: {                       
+			        enabled: false,              
+			        content: 'Panel footer',    
+			    },
+                width:300,
+                floatHeightInvolve: true,
+                floatHeight: 10,
+                direction:'down',
+            });
+	}
 	
 	
 	
 	
 	$('#toTest').click(function(){
-	var num=prompt("请输入全局端口号");
-	var inter=prompt("请输入招测间隔(s)");
+	//var num=prompt("请输入全局端口号");
+	var num=$('#all1').val();
+	
+	//var inter=prompt("请输入招测间隔(s)");
+	var inter=$('#all2').val();
 	if(num==''||num==null){
-	alert("不能为空!!!");return;
+	alert("全局端口号不能为空!!!");return;
 	}
 	if(inter==''||inter==null){
-	alert("不能为空!!!");return;
+	alert("全局招测间隔不能为空!!!");return;
 	}
 	
 	var $td = $('#tbody tr').length;
@@ -460,15 +855,32 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 				alert('请设置规则 再开始测试!!!');
 				return;
 			}
-	
+	var panel = null;
+   
+    var  p = "";
+        
+		
+	$.ajax({
+		   url:'http://127.0.0.1:9001/sso/config/clean',async:false,
+		   success:function(data){
+		   p=p+data.message+"  ";
+		   }
+		   })  
+
 	$.ajax({
 		url:'http://127.0.0.1:9001/sso/config/starttest/'+num+'/'+inter,
 		dataType:'json',
 		success:function(data){
 		if(data.flag)
 		{	
-		alert(data.message);
-		window.location.href = "run.html";}
+		p=p+data.message;
+		panel=rePanel(p);
+		panel.show();
+		setTimeout(function(){
+			panel.hide();
+			window.location.href = "run.html";
+		},1500);
+		}
 		else{alert(data.message);}
 		}
 	
@@ -492,6 +904,7 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 			{
 			$(this).children().children('input[type=checkbox]').prop('style','display:inline');
 			$(this).children().children('input[type=checkbox]').prop('checked',false);
+			checkallflag();
 			}
 		})
 		
@@ -509,7 +922,13 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 		
 		function ale(a)
 		{
-			alert($(a).parent().parent().attr('class'));
+			var xx=new Array();
+			xx=$(a).parent().parent().attr('class').split(',');
+			var ress="";
+			xx.forEach(function(a){
+				ress+=a+'\n';
+			})
+			alert(ress);
 		}
 		// 按选择器清空页面
 		function clear(rule) {
@@ -534,7 +953,11 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 				$('#'+arr2[i]).prop('checked',false);
 				$("input[value='"+arr2[i]+"']").prop('style','display:inline');
 				$("input[value='"+arr2[i]+"']").prop('checked',false);
-			};		alert(data.message);
+			};	checkallflag();	panel=rePanel(data.message);
+								panel.show();
+								setTimeout(function(){
+									panel.hide();
+								},1000); 
 				}
 				else
 				{alert(data.message)}
@@ -607,9 +1030,18 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 		
 		$('#setRes').click(
 				function() {
+					//设置是先校验
+					
+		
+					var checkport=$('#port').val();
+					if(checkport>65535||checkport<0){alert('端口号非法');$('#port').focus();return;}
+					var checkdataLen=$("#dataLen").val();
+					if(checkdataLen<8){alert('数据长度必须大于等于8');$("#dataLen").focus();return;}
+					
+					//
 					var flag= true;
 					var div1="";
-					var $type=$('input[type=radio]:checked').val();
+					var $type=$('input[type=radio][name=testType]:checked').val();
 					$('#ip1').children('input').each(function(){
 					if($(this).val()=='') return false;
 					div1+=$(this).val()+".";
@@ -627,12 +1059,12 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 					div3+=$(this).val()+".";
 					})
 					div3=div3.substr(0,div3.length-1);
-					alert($type);
+					
 					var $ip1 = div1;
 					var $ip2 = div2;
 					var $ret = $('#retChose').val();
-					var $check = $('input[type=checkbox]:checked').val();
-					$('input[type=text]').each(function(){
+					var $check = $('input[type=checkbox][name!=checkall]:checked').val();
+					$('input[type=text][name!=all]').each(function(){
 						if($(this).val()==''&&flag)
 							{
 							if(typeof ($check)== 'undefined')
@@ -672,9 +1104,10 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 							&& $ip2 != '') {
 					var $json="{";
 						$('#tbody').children().remove();
-						$('input[type=text]').each(function(c,v){
+						$('input[type=text][name!=all]').each(function(c,v){
 						if($(this).val()!="")
 						{
+							//alert(c+" + "+$(v).val());
 						switch(c){
 					case 0:
 						$json+='"startip" :"'+div1+'",';
@@ -701,9 +1134,15 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 						$json+='"testType" : '+ $type +',';
 						$json+='"intervalOfPerTime" :'+$(v).val()+",";
 						break;
-					case 17:
-						$json+='"callLength" :"'+$(v).val()+'"}';
+					case 18:
+						$json+='"callLength" :"'+$(v).val()+'",';
 						break;
+					case 17:
+						$json+='"batchDelay" :"'+$(v).val()+'",';
+						break;
+					case 19:
+					$json+='"batchNum" :"'+$(v).val()+'"}';
+					break;
 					};
 						
 					}});
@@ -727,7 +1166,7 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 									
 									
 									if(v.testType=="0"){$type="招测"}else{$type="上报"};
-									$('#tbody').append("<tr><td>"+$type+"</td><td>"+v.numOfPktsPerTime+"</td><td>"+v.intervalOfPerPkt+"</td><td>"+v.dataLength+"</td><td>"+v.portNum+"</td><td>"+v.intervalOfPerTime+"</td><td>"+v.callLength+"</td><td id='m' class='"+list2.toString()+"'><a title='"+v.id+"' class='"+list2.toString()+"'><i onclick='del(this)' class='glyphicon glyphicon-remove-sign'></i></a><a><i onclick='ale(this)' class='glyphicon glyphicon-cog'></i></a></td></tr>")
+									$('#tbody').append("<tr><td>"+$type+"</td><td>"+v.numOfPktsPerTime+"</td><td>"+v.intervalOfPerPkt+"</td><td>"+v.dataLength+"</td><td>"+v.portNum+"</td><td>"+v.intervalOfPerTime+"</td><td>"+v.callLength+"</td><td>"+v.batchDelay+"</td><td>"+v.batchNum+"</td><td id='m' class='"+list2.toString()+"'><a title='"+v.id+"' class='"+list2.toString()+"'><i onclick='del(this)' class='glyphicon glyphicon-remove-sign'></i></a><a><i onclick='ale(this)' class='glyphicon glyphicon-cog'></i></a></td></tr>")
 									
 									for(var i=0;i<list2.length;i++){
 									
@@ -735,7 +1174,12 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 										}
 									
 									})
-									alert(data.message);
+									var p=data.message;
+									var panel=rePanel(p);
+									panel.show();
+									setTimeout(function(){
+										panel.hide();
+									},1500);
 									}else{alert(data.message);}
 									
 									}
@@ -748,7 +1192,7 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 					}
 					 else if (typeof ($check) != 'undefined' && $ip1 == ''
 							&& $ip2 == '') {
-						alert('选择配置');
+						//alert('选择配置');
 						$('#tbody').children().remove();
 						//test
 						var $json="{";
@@ -764,10 +1208,11 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 						
 						$json=$json.substr(0,$json.length-1);
 						$json+='],';
-						$('input[type=text]').each(function(c,v){
+						$('input[type=text][name!=all]').each(function(c,v){
 						
 						if($(this).val()!="")
 						{
+							//alert(c+" ++ "+$(v).val());
 						switch(c){
 					case 100:
 						$json+='"startip" :"'+div1+'",';
@@ -794,9 +1239,15 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 						$json+='"testType" : '+ $type +',';
 						$json+='"intervalOfPerTime" :'+$(v).val()+",";
 						break;
-					case 17:
-						$json+='"callLength" :"'+$(v).val()+'"}';
+					case 18:
+						$json+='"callLength" :"'+$(v).val()+'",';
 						break;
+					case 17:
+						$json+='"batchDelay" :"'+$(v).val()+'",';
+						break;
+					case 19:
+					$json+='"batchNum" :"'+$(v).val()+'"}';
+					break;
 			};
 					
 						};	
@@ -820,14 +1271,19 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 									})
 									
 									if(v.testType=="0"){$type="招测"}else{$type="上报"};
-									$('#tbody').append("<tr><td>"+$type+"</td><td>"+v.numOfPktsPerTime+"</td><td>"+v.intervalOfPerPkt+"</td><td>"+v.dataLength+"</td><td>"+v.portNum+"</td><td>"+v.intervalOfPerTime+"</td><td>"+v.callLength+"</td><td id='m' class='"+list3.toString()+"'><a title='"+v.id+"' class='"+list.toString()+"'><i onclick='del(this)' class='glyphicon glyphicon-remove-sign'></i></a><a><i onclick='ale(this)' class='glyphicon glyphicon-cog'></i></a></td></tr>")
+									$('#tbody').append("<tr><td>"+$type+"</td><td>"+v.numOfPktsPerTime+"</td><td>"+v.intervalOfPerPkt+"</td><td>"+v.dataLength+"</td><td>"+v.portNum+"</td><td>"+v.intervalOfPerTime+"</td><td>"+v.callLength+"</td><td>"+v.batchDelay+"</td><td>"+v.batchNum+"</td><td id='m' class='"+list3.toString()+"'><a title='"+v.id+"' class='"+list.toString()+"'><i onclick='del(this)' class='glyphicon glyphicon-remove-sign'></i></a><a><i onclick='ale(this)' class='glyphicon glyphicon-cog'></i></a></td></tr>")
 									
 									});
 									for(var i=0;i<list.length;i++){
 									
 									$('#'+list[i]).prop('style','display:none');
 										}
-										alert(data.message)
+										var p=data.message;
+									var panel=rePanel(p);
+									panel.show();
+									setTimeout(function(){
+										panel.hide();
+									},1500);
 									}
 									else{
 									alert(data.message)}
@@ -841,16 +1297,22 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 
 					//$('form').prop('action','').submit();
 				})
-		$('#toTest').click(function() {
-			
-		})
+		
 		
 		$('#port').blur(function(){
 		
 		var x=$(this).val();
-		if(x>65535||x<0){$(this).focus();alert('端口号非法')}
+		if(x>65535||x<0){alert('端口号非法');$(this).focus();}
 		
 		})
+		
+		$('#dataLen').blur(function(){
+		
+		var x=$(this).val();
+		if(x<8){alert('数据长度必须大于等于8');$(this).focus();}
+		
+		})
+		
 		
 		window.onload =function()
 		{
@@ -872,7 +1334,7 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 				
 				
 				if(v.testType=="0"){$type="招测"}else{$type="上报"};
-				$('#tbody').append("<tr><td>"+$type+"</td><td>"+v.numOfPktsPerTime+"</td><td>"+v.intervalOfPerPkt+"</td><td>"+v.dataLength+"</td><td>"+v.portNum+"</td><td>"+v.intervalOfPerTime+"</td><td>"+v.callLength+"</td><td id='m' class='"+list3.toString()+"'><a title='"+v.id+"' class='"+list3.toString()+"'><i onclick='del(this)' class='glyphicon glyphicon-remove-sign'></i></a><a><i onclick='ale(this)' class='glyphicon glyphicon-cog'></i></a></td></tr>")
+				$('#tbody').append("<tr><td>"+$type+"</td><td>"+v.numOfPktsPerTime+"</td><td>"+v.intervalOfPerPkt+"</td><td>"+v.dataLength+"</td><td>"+v.portNum+"</td><td>"+v.intervalOfPerTime+"</td><td>"+v.callLength+"</td><td>"+v.batchDelay+"</td><td>"+v.batchNum+"</td><td id='m' class='"+list3.toString()+"'><a title='"+v.id+"' class='"+list3.toString()+"'><i onclick='del(this)' class='glyphicon glyphicon-remove-sign'></i></a><a><i onclick='ale(this)' class='glyphicon glyphicon-cog'></i></a></td></tr>")
 				
 				for(var i=0;i<list3.length;i++){
 				
@@ -909,7 +1371,12 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
            $.ajax({
 		   url:'http://127.0.0.1:9001/sso/config/clean',
 		   success:function(data){
-		   alert(data.message)
+		   var p=data.message;
+			var panel=rePanel(p);
+			panel.show();
+			setTimeout(function(){
+				panel.hide();
+			},1500);
 		   }
 		   })  
         }  
@@ -957,21 +1424,23 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 		
 		function hasUe(data){
 		var flag=false
-		$('input[type=checkbox]').each(function(){
+		$('input[type=checkbox][name!=checkall]').each(function(){
 		if($(this).attr('value')==data){
 		flag=true;
-		return flag;
+		return false;
 		}
 		else{
-		return flag;
+		//return flag;
 		}
+		
 		})
+		return flag;
 		}
 		
         //将消息显示在网页上
         function setMessageInnerHTML(data) {
 				
-			if(typeof(data)!='undefined'&&data!=null&&data!="okok"){
+			/*if(typeof(data)!='undefined'&&data!=null&&data!="okok"){
 				//$('#uetable').children().remove();
 				//alert(data)
 				
@@ -979,14 +1448,16 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 				var imsi=eval("("+data+")").imsi;
 				var onlinestate=eval("("+data+")").onlinestate;
 				if(hasUe(ip)){
-				if(onlinestate==1)
-				{$('input[type=checkbox][value="'+ip+'"]').prop('style','display:inline');
-				$('input[type=checkbox][value="'+ip+'"]').parent().parent().prop('style','color:black');
-				}else
-				{
-				$('input[type=checkbox][value="'+ip+'"]').prop('style','display:none');
-				$('input[type=checkbox][value="'+ip+'"]').parent().parent().prop('style','color:gray');
-				}}
+					if(onlinestate==1)
+						{$('input[type=checkbox][value="'+ip+'"]').prop('style','display:inline');
+						$('input[type=checkbox][value="'+ip+'"]').parent().parent().prop('style','color:black');
+						}
+					else
+						{
+						$('input[type=checkbox][value="'+ip+'"]').prop('style','display:none');
+						$('input[type=checkbox][value="'+ip+'"]').parent().parent().prop('style','color:gray');
+						}
+				}
 				else
 				{
 			     
@@ -1012,9 +1483,15 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 				 $('#uetable').append("<tr style='"+color+"'><td width='25px'><input type='checkbox' id='a"+imsi+"' value='"+ip+"' name='ueList' style='"+style+"'></td><td width='50px'><font >"+ip+"</font>        &nbsp&nbsp</td><td width='50px'><font >"+imsi+"</font></td></tr>'");
 				 
 				}
-			}
+			checkallflag();}*/
+ 		if(typeof(data)!='undefined'&&data!=null&&data!="okok"){
+        	var zzz=$('#enodebs').val();
+        	if(zzz!="none")
+        		{toChangeEnodeb(zzz);}}
+    		else
+    			{console.log(data.message)}
         }
-
+       
         //关闭连接
         function closeWebSocket() {
             websocket.close();
@@ -1060,5 +1537,5 @@ input.IPInput{width:24;font-size:9pt;text-align:center;border-width:0;
 	<script src="js/forms.js"></script>
 
 </body>
-
 </html>
+

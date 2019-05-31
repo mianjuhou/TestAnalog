@@ -23,7 +23,7 @@
 	rel="stylesheet">
 <link href="vendors/select/bootstrap-select.min.css" rel="stylesheet">
 <link href="vendors/tags/css/bootstrap-tags.css" rel="stylesheet">
-
+<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 <link href="css/forms.css" rel="stylesheet">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -46,6 +46,11 @@ legend{
     color: red;
     margin-bottom: 0px;
 
+}
+
+footer{
+	padding-top: 10px ;
+	height: 55px
 }
 </style>
 </head>
@@ -104,7 +109,7 @@ legend{
 						</div>
 					</div>
 					<div class="content-box-large box-with-header"
-						style="display: block; overflow-y: scroll; height: 690px; width: 1250px" id='show'
+						style="display: block; overflow-y: none;height: 485px; width: 1250px" id='show'
 						>
 						<label class="col-sm-12 control-label">测试列表</label>
 						<!-- <fieldset th:each="c,v:${rule}" th:title="${#strings.listJoin(c.ues,',')}"> 
@@ -120,7 +125,7 @@ legend{
 									<th>应收包数</th>
 									<th>实收包数</th>
 									<th>平均时延</th>
-									<th>最大时延</th>
+									<th>速度</th>
 								</tr>
 							</thead>
 							
@@ -145,7 +150,7 @@ legend{
 
 		<!--  Page content -->
 		<footer>
-			<div class="container">
+			<div class="container" >
 
 				<div class="copy text-center">
 					Copyright 2019 <a href='#'>potevio</a>
@@ -162,7 +167,7 @@ legend{
 	<script type="text/javascript">
 	
 	//Ajax长轮询技术
-
+	//$('body').height(768);
     var getting1 = {
 
         url:'server.php',
@@ -181,7 +186,7 @@ legend{
         $.ajax($getting);
         }
 
-};
+	};
 	
 //$.ajax(getting);
 	
@@ -191,8 +196,138 @@ legend{
 	
 	</script>
 	<script type="text/javascript">
-	
-	
+		$(document).ready( function () {
+		 var getting5 = {
+		        url:'http://127.0.0.1:9001/sso/config/getall',
+		        dataType:'json',
+		        success:function(res) {
+				//if(res.flag){
+					if(res.flag){
+						$('#show').prop("style","display: block; overflow-y: none; width: 1250px");
+		        	 $.each(res.data,function(c,v){
+
+		        		 var $list=new Array();
+						 var $type="";
+						 var style="";
+						 if(v.testType=="0"){$type="招测"}else{$type="上报"};
+						 if(c<0){
+						 style="color:white";
+						 }
+						 $list=v.ueList;
+						 $('#show').append("<fieldset title="+$list.toString()+"><legend>"+
+						 $type+"-上报个数"+v.numOfPktsPerTime+"-上报间隔"+v.intervalOfPerTime+"-上报周期"+v.intervalOfPerPkt+"-端口号"+v.portNum+"-数据长度"+v.dataLength+"-招测长度"+v.callLength+"-分批时延"+v.batchDelay+"-单批数量"+v.batchNum+"</legend><table title="+$list.toString()+" class='table'><thead style='"+style+"'><tr><th>终端ip</th><th>在线状态</th>	<th>测试状态</th><th>测试次数</th><th>应收包数</th><th>实收包数</th><th>平均时延</th><th>速度</th><th>最近时延</th></tr></thead></table></fieldset>");
+					
+		        	}) }else{
+		        	 	alert(res.message);
+		        	 };
+					//}else
+					//{
+					//alert(res.message);
+					//}}
+					//alert(1);
+					var tables=new Array();
+					$('table').each(function(){
+						var now=$(this);
+						tables.push(now);
+						//alert(2);
+						var flagg=true;
+
+						var test={
+					   		"url": 'http://127.0.0.1:9001/sso/analog/find',
+					   		"async":flagg,
+					   		"dataSrc": function (myJson) {
+					   			//alert(flagg);
+			                 	if(myJson.flag){
+			                 		flagg=true;
+			                 		//alert(4);
+			                 	for(var i=0;i<myJson.data.length;i++){
+			                 		//alert(myJson.data[i]);
+			                 		var $ip=myJson.data[i].ip;
+			                 		//alert(i+" "+now.attr('title')+"  "+$ip+"  "+now.attr('title').search($ip) )
+			                    	if(now.attr('title').search($ip)>=0){
+			                    		
+			                    	}else{
+			                    	 myJson.data.splice(i,1);
+			                    	 i=i-1;
+			                    	}
+			                 	}
+			                    
+			                    return myJson.data;}else
+			                    {
+			                    	alert(myJson.message);return false;
+			                    };
+
+
+			                }
+					   	};
+
+						var table = $(this).DataTable( {
+							"searching": false,"info": false,"lengthChange": false,"paging": false,"scrollX": false,"lengthMenu": false,"autoWidth":false,"deferRender":true,"ordering":true,"serverSide": false,
+					   	"ajax": test,
+					    "columns": [
+			            { "data": "ip" },
+			            { "data": "onlinestate","orderable":false,
+						"createdCell": function (cell, cellData, rowData, row, col) {
+			                    
+			                    if ( cellData == 0 ) {
+			                        $(cell).parent().css('color', 'pink')
+			                    }else{
+			                    	$(cell).parent().css('color', 'black')
+			                    }
+			                }
+			        	},
+			            { "data": "testStatus","orderable":false ,
+						"createdCell": function (cell, cellData, rowData, row, col) {
+			                    
+			                    if ( cellData == 0 ) {
+			                        $(cell).parent().css('color', 'pink')
+			                    }else{
+
+			                    }
+			                }},
+			            { "data": "testTime","orderable":false },
+			             { "data": "pktReceivable" ,"orderable":false},
+			             { "data": "pktReceived" },
+			             { "data": "maxDelay" ,"orderable":false},
+			              { "data": "avgDelay" ,"orderable":false},
+			               { "data": "lastDelay" ,"orderable":false},
+			            ]
+			                   	});
+						//alert($('.dataTables_empty').text());
+						//setTimeOut
+						
+						//table.ajax.async(true).reload();
+						//window.setInterval(function(){table.ajax.url( 'http://127.0.0.1:9001/sso/analog/find' ).load();},1000);
+						//window.setInterval(function(){table.ajax.reload();},10000);
+
+						
+						function clx(){
+							$.ajax({'url':'http://127.0.0.1:9001/sso/analog/find',
+
+						        dataType:'json', success:function(res) {
+						        	//alert(6);
+						         table.ajax.reload();
+
+						         clx(); //关键在这里，回调函数内再次请求Ajax
+
+								},
+						        //当请求时间过长（默认为60秒），就再次调用ajax长轮询
+						        error:function(res){
+						        clx();
+						        }
+						    })
+						}
+						 clx();	
+						
+
+						
+					})
+
+					
+
+					}}
+			$.ajax(getting5);
+	});
 	</script>
 	<script type="text/javascript">
 		//$('#retrun').click(function(){
@@ -200,7 +335,7 @@ legend{
 		//window.location.href = "forms2.html"
 		//})
 		$('#stopTest').click(function(){
-			getting2 = null;
+			getting5 = null;
 		});
 	   var getting2 = {
 		        url:'http://127.0.0.1:9001/sso/config/getall',
@@ -217,7 +352,7 @@ legend{
 						 }
 						 $list=v.ueList;
 						 $('#show').append("<fieldset title="+$list.toString()+"><legend>"+
-						 $type+"|上报个数"+v.numOfPktsPerTime+"|上报间隔"+v.intervalOfPerTime+"|上报周期"+v.intervalOfPerPkt+"|端口号"+v.portNum+"|数据长度"+v.dataLength+"|招测长度"+v.callLength+"</legend><table class='table'><thead style='"+style+"'><tr><th>终端ip</th><th>在线状态</th>	<th>测试状态</th><th>测试次数</th><th>应收包数</th><th>实收包数</th><th>平均时延</th><th>最大时延</th><th>最近时延</th></tr></thead></table></fieldset>");
+						 $type+"|上报个数"+v.numOfPktsPerTime+"|上报间隔"+v.intervalOfPerTime+"|上报周期"+v.intervalOfPerPkt+"|端口号"+v.portNum+"|数据长度"+v.dataLength+"|招测长度"+v.callLength+"</legend><table class='table'><thead style='"+style+"'><tr><th>终端ip</th><th>在线状态</th>	<th>测试状态</th><th>测试次数</th><th>应收包数</th><th>实收包数</th><th>平均时延</th><th>速度</th><th>最近时延</th></tr></thead></table></fieldset>");
 		        	}) ;
 					}else
 					{
@@ -266,8 +401,8 @@ legend{
 				}else{alert(data.message)}
 				}
 		}
-		$.ajax(getting2);
-		$.ajax(getting3);
+		//$.ajax(getting2);
+		//$.ajax(getting3);
 		
 		var getting4 = {
 				url:'http://127.0.0.1:9001/sso/analog/find',
@@ -350,25 +485,38 @@ legend{
 			dataType:'json',
 			success:function(data){
 			alert(data.message);
+			var r=confirm("是否保存结果??");
+			if (r==true)
+			{
+			    exportexcel();
+			}
+			else
+			{
+			    
+			}
+
 			}
 			})
 			});
 	
 	
-	window.setInterval(function(){$.ajax(getting4)},1000);
+	//window.setInterval(function(){$.ajax(getting4)},1000);
 	
 	
 	$('#export').click(function(){
 	
-	
-	
-	
+	exportexcel();
+
+	})
+
+
+	function exportexcel(){
 	var $json='[';
 	var $key='';
 	var $value='';
 	var head='';
 	var data=new Date();
-	$value=''+data.getHours()+data.getMinutes()+data.getSeconds()+data.getMilliseconds()+".xlsx";
+	$value=''+eval(data.getMonth()+"+"+'1')+data.getDate()+data.getHours()+data.getMinutes()+data.getSeconds()+".xlsx";
 	$('#downloadA').prop('download',$value);
 		$('tr').each(function(c1,v1){
 			if(typeof($(this).parent().parent().attr('title'))=='undefined')
@@ -377,8 +525,8 @@ legend{
 				
 					$json+=",";
 				}
-				
-				head = '"规则id" :"'+$(this).parent().parent().attr('title')+'",';
+				if(c1==0){return true;}
+				head = '"规则id" :"'+c1+'",';
 				$json = $json+"{"+head;
 			$.each($(this).children(),function(c,v){
 				
@@ -394,22 +542,22 @@ legend{
 						$json+='"测试状态" :"'+$(v).text()+'",';
 						break;
 					case 3:
-						$json+='"测试次数" :'+$(v).text()+",";
+						$json+='"测试次数" :"'+$(v).text()+'",';
 						break;
 					case 4:
-						$json+='"应收包数" :'+$(v).text()+",";
+						$json+='"应收包数" :"'+$(v).text()+'",';
 						break;
 					case 5:
-						$json+='"实收包数" :'+$(v).text()+",";
+						$json+='"实收包数" :"'+$(v).text()+'",';
 						break;
 					case 6:
-						$json+='"最大时延" :'+$(v).text()+",";
+						$json+='"速度" :"'+$(v).text()+'",';
 						break;
 					case 7:
-						$json+='"平均时延" :'+$(v).text()+",";
+						$json+='"平均时延" :"'+$(v).text()+'",';
 						break;
 					case 8:
-						$json+='"最近时延" :'+$(v).text()+"}";
+						$json+='"最近时延" :"'+$(v).text()+'"}';
 						break;
 			};
 			
@@ -418,7 +566,7 @@ legend{
 			$json+="]";
 		//请在点击导出出完数据之后清空$json
 		
-		
+		//alert($json);
 		//excel
 		 var tmpDown; //导出的二进制对象
 		 
@@ -490,12 +638,10 @@ legend{
 		downloadExl(JSON.parse($json));
 		
 	
-	
-	
-	
-	
+	}
 
-	})
+
+
 		$('#clearData').click(function(){
 		 if (confirm("你确定清空数据吗？")) {  
            $.ajax({
@@ -510,6 +656,14 @@ legend{
         }  
 		})
 		
+
+
+
+
+
+
+
+
 		
 	</script>
 	
@@ -532,7 +686,7 @@ legend{
 	<script src="vendors/moment/moment.min.js"></script>
 
 	<script src="vendors/wizard/jquery.bootstrap.wizard.min.js"></script>
-
+	<script type="text/javascript" src="DataTables/datatables.min.js"></script>
 	<!-- bootstrap-datetimepicker -->
 	<link href="vendors/bootstrap-datetimepicker/datetimepicker.css"
 		rel="stylesheet">
@@ -547,4 +701,3 @@ legend{
 
 </body>
 
-</html>
