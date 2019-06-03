@@ -678,7 +678,7 @@ function toChangeEnodeb(id){
 			type: 'delete',
 			contentType: 'application/json;charset=UTF-8',
 			success:function(data){
-				if(data.flag){$(d).parent().parent().remove();$('#fanhui').click();}else{
+				if(data.flag){$(d).parent().parent().remove();}else{
 					var panel=rePanel(data.message);
 						panel.show();
 						setTimeout(function(){

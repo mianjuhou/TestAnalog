@@ -81,8 +81,8 @@ footer{
 										 <a href="" download="我是导出来的测试文件.xlsx" id="downloadA"></a>
 									</div>
 									<div class='col-md-2'>
-										<button class="btn btn-info" id="retrun" type="button">
-											<a href="forms2.html" >返回</a>
+										<button class="btn btn-info" id="toretrun" type="button">
+											<a href="#" id="retrun">返回</a>
 										</button>
 									</div>
 									<div class='col-md-4'>
@@ -215,7 +215,7 @@ footer{
 						 }
 						 $list=v.ueList;
 						 $('#show').append("<fieldset title="+$list.toString()+"><legend>"+
-						 $type+"-上报个数"+v.numOfPktsPerTime+"-上报间隔"+v.intervalOfPerTime+"-上报周期"+v.intervalOfPerPkt+"-端口号"+v.portNum+"-数据长度"+v.dataLength+"-招测长度"+v.callLength+"-分批时延"+v.batchDelay+"-单批数量"+v.batchNum+"</legend><table title="+$list.toString()+" class='table'><thead style='"+style+"'><tr><th>终端ip</th><th>在线状态</th>	<th>测试状态</th><th>测试次数</th><th>应收包数</th><th>实收包数</th><th>平均时延</th><th>速度</th><th>最近时延</th><th>丢包数</th></tr></thead></table></fieldset>");
+						 $type+"-上报个数"+v.numOfPktsPerTime+"-上报间隔"+v.intervalOfPerTime+"-上报周期"+v.intervalOfPerPkt+"-端口号"+v.portNum+"-数据长度"+v.dataLength+"-招测长度"+v.callLength+"-分批时延"+v.batchDelay+"-单批数量"+v.batchNum+"</legend><table title="+$list.toString()+" class='table'><thead style='"+style+"'><tr><th>终端ip</th><th>在线状态</th>	<th>测试状态</th><th>测试次数</th><th>应收包数</th><th>实收包数</th><th>平均时延</th><th>速度</th><th>最近时延</th><th>丢包数</th></tr></thead></table></fieldset>");//<th>丢包数</th>
 					
 		        	}) }else{
 		        	 	alert(res.message);
@@ -245,7 +245,8 @@ footer{
 			                 		//alert(myJson.data[i]);
 			                 		var $ip=myJson.data[i].ip;
 			                 		//alert(i+" "+now.attr('title')+"  "+$ip+"  "+now.attr('title').search($ip) )
-			                    	if(now.attr('title').search($ip)>=0){
+			                    	myJson.data[i]["lossPackNum"]=eval(myJson.data[i].pktReceivable+"-"+myJson.data[i].pktReceived);
+									if(now.attr('title').search($ip)>=0){
 			                    		
 			                    	}else{
 			                    	 myJson.data.splice(i,1);
@@ -271,7 +272,7 @@ footer{
 						"createdCell": function (cell, cellData, rowData, row, col) {
 			                    
 			                    if ( cellData == 0 ) {
-			                        $(cell).parent().css('color', 'pink')
+			                        $(cell).parent().css('color', 'red')
 			                    }else{
 			                    	$(cell).parent().css('color', 'black')
 			                    }
@@ -281,7 +282,7 @@ footer{
 						"createdCell": function (cell, cellData, rowData, row, col) {
 			                    
 			                    if ( cellData == 0 ) {
-			                        $(cell).parent().css('color', 'pink')
+			                        $(cell).parent().css('color', 'red')
 			                    }else{
 
 			                    }
@@ -292,7 +293,7 @@ footer{
 			             { "data": "maxDelay" ,"orderable":false},
 			              { "data": "avgDelay" ,"orderable":false},
 			               { "data": "lastDelay" ,"orderable":false},
-						   { "data": "丢包数" },
+						   { "data": "lossPackNum" },
 			            ]
 			                   	});
 						//alert($('.dataTables_empty').text());
@@ -479,7 +480,12 @@ footer{
 		//Ajax定时访问服务端，不断获取数据 ，1秒请求一次。
 		
 		//
-		
+		$("#toretrun").click(function(){
+		var lp=$('#retrun').attr('href');
+		if(lp=="#"||lp==""||lp==null){
+		alert("请先停止测试");return;
+		}
+		})
 		
 		$('#stopTest').click(function(){
 			$.ajax({
@@ -487,6 +493,8 @@ footer{
 			dataType:'json',
 			success:function(data){
 			alert(data.message);
+			
+			$('#retrun').prop("href","forms2.html")
 			var r=confirm("是否保存结果??");
 			if (r==true)
 			{
