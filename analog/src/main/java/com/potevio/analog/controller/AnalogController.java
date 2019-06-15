@@ -94,4 +94,11 @@ public class AnalogController {
         }
     }
 
+    @GetMapping("/clearall")
+    @ApiOperation(value = "清空缓存，Redis,TCP端各种缓存")
+    public Result clearAll() {
+        service.clearAll();
+        return new Result(false, StatusCode.OK, "发送清空数据成功");
+    }
+
 }

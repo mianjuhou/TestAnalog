@@ -1,0 +1,28 @@
+<component name="libraryTable">
+  <library name="animal-sniffer-annotations-1.17 (2)">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/animal-sniffer-annotations-1.17.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/checker-qual-2.5.2.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/commons-lang3-3.5.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/commons-pool2-2.4.2.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/error_prone_annotations-2.2.0.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/failureaccess-1.0.1.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/guava-27.0.1-jre.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/j2objc-annotations-1.1.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/jackson-annotations-2.9.0.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/jackson-core-2.9.4.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/jackson-databind-2.9.4.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/jedis-2.9.0.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/joda-time-2.9.9.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/jsr305-3.0.2.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/logback-classic-1.2.3.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/logback-core-1.2.3.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/mysql-connector-java-5.1.6-bin.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/netty-all-4.1.33.Final.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/nettyReformatted.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/230latest/nettyReformatted/out/artifacts/nettyReformatted_jar/slf4j-api-1.7.25.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

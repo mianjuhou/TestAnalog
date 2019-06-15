@@ -617,7 +617,8 @@ function toChangeEnodeb(id){
 				var $type="";
 				var list3 = new Array();
 				$.each(v.ueList,function(c1,v1){
-				list3.push(v1);
+
+				list3.push(c1);
 				})
 				if(v.testType=="0"){$type="招测"}else{$type="上报"};
 				for(var i=0;i<list3.length;i++){
@@ -1198,16 +1199,21 @@ function toChangeEnodeb(id){
 						var $json="{";
 						//$('form').prop('action', 'http://127.0.0.1/sso/config/add').submit();
 						//$('input[tyep=checkbox]:checked').prop('style','display:none');
-						$json+='"ueList":[';
+						$json+='"ueList":{';
 						var list = new Array();
 						$.each(map,function(c,v){
 							
-							$json+='"'+v+'",';
+							//$json+='"'+v+'",';
+							$json+='"'+v+'":"'+c.substr(1,c.length)+'",';
 							list.push(c);
+							
+							//0605 => ueList:[]=>ueList:{}
+							
+							
 						});
 						
 						$json=$json.substr(0,$json.length-1);
-						$json+='],';
+						$json+='},';
 						$('input[type=text][name!=all]').each(function(c,v){
 						
 						if($(this).val()!="")
@@ -1249,7 +1255,7 @@ function toChangeEnodeb(id){
 					$json+='"batchNum" :"'+$(v).val()+'"}';
 					break;
 			};
-					
+					console.log($json)
 						};	
 						});
 												
@@ -1299,19 +1305,19 @@ function toChangeEnodeb(id){
 				})
 		
 		
-		$('#port').blur(function(){
+		//$('#port').blur(function(){
 		
-		var x=$(this).val();
-		if(x>65535||x<0){alert('端口号非法');$(this).focus();}
+		//var x=$(this).val();
+		//if(x>65535||x<0){alert('端口号非法');$(this).focus();}
 		
-		})
+		//})
 		
-		$('#dataLen').blur(function(){
+		//$('#dataLen').blur(function(){
+		//
+		//var x=$(this).val();
+		//if(x<8){alert('数据长度必须大于等于8');$(this).focus();}
 		
-		var x=$(this).val();
-		if(x<8){alert('数据长度必须大于等于8');$(this).focus();}
-		
-		})
+		//})
 		
 		
 		window.onload =function()

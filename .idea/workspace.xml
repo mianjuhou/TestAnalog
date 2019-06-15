@@ -1,0 +1,1407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="TestAnalog:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="53da6441-5a27-448b-98f7-8661ee3dc7e2" name="Default Changelist" comment="添加前端页面">
+      <change afterPath="$PROJECT_DIR$/.idea/TestAnalog.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/TestAnalog_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/animal_sniffer_annotations_1_17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/animal_sniffer_annotations_1_17__2_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1_6_bin.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/7/272f8ab568d4d814c0f74c778c036122e4f4a3c7" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analog/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/analog/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/controller/AnalogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/controller/AnalogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/ConfigData.java" beforeDir="false" afterPath="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/ConfigData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/service/AnalogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/service/AnalogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/service/ConfigService.java" beforeDir="false" afterPath="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/service/ConfigService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analog/src/main/resources/ExcelConfig.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/analog/src/main/resources/ExcelConfig.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analog/src/main/resources/static/dianli/forms2.html" beforeDir="false" afterPath="$PROJECT_DIR$/analog/src/main/resources/static/dianli/forms2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analog/src/main/resources/static/dianli/run.html" beforeDir="false" afterPath="$PROJECT_DIR$/analog/src/main/resources/static/dianli/run.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analog/src/main/resources/templates/ExcelConfig.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/analog/src/main/resources/templates/ExcelConfig.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thymeleafdemo/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thymeleafdemo/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thymeleafdemo/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thymeleafdemo/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thymeleafdemo/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thymeleafdemo/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thymeleafdemo/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thymeleafdemo/src/main/java/com/fs/thymeleafdemo/ThymeleafdemoApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thymeleafdemo/src/main/java/com/fs/thymeleafdemo/controller/TestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thymeleafdemo/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thymeleafdemo/src/main/resources/static/mystatic.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thymeleafdemo/src/main/resources/templates/result.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thymeleafdemo/src/test/java/com/fs/thymeleafdemo/ThymeleafdemoApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/websocketdemo/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/websocketdemo/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/websocketdemo/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/websocketdemo/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/websocketdemo/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/websocketdemo/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/websocketdemo/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/websocketdemo/src/main/java/com/fs/websocketdemo/WSApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/websocketdemo/src/main/java/com/fs/websocketdemo/config/WebSocketConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/websocketdemo/src/main/java/com/fs/websocketdemo/controller/WebSocketController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/websocketdemo/src/main/java/com/fs/websocketdemo/ws/MyWebSocket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/websocketdemo/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/websocketdemo/src/main/resources/static/pages/myhtml.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/websocketdemo/src/test/java/com/fs/websocketdemo/WebsocketdemoApplicationTests.java" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/analog/target/" />
+    <ignored path="$PROJECT_DIR$/websocketdemo/target/" />
+    <ignored path="$PROJECT_DIR$/demo/target/" />
+    <ignored path="$PROJECT_DIR$/thymeleafdemo/target/" />
+    <ignored path="$PROJECT_DIR$/../nettyReformatted/target/" />
+    <ignored path="$USER_HOME$/Desktop/230latest/nettyReformatted/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/controller/AnalogController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="720">
+              <caret line="48" column="50" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/service/AnalogService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3015">
+              <caret line="220" column="15" selection-start-line="220" selection-start-column="15" selection-end-line="220" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/analog/src/main/resources/static/dianli/forms2.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="107">
+              <caret line="737" column="12" selection-start-line="737" selection-start-column="12" selection-end-line="737" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/entity/Result.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/ConfigWrapperData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/ConfigData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/AnalogData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2630#2631#0" expanded="true" />
+                <element signature="e#2664#2665#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/controller/ConfigController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="990">
+              <caret line="66" column="5" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>10.3.93.</find>
+      <find>10.3.93.87</find>
+      <find>169.254.80.55</find>
+      <find>10.3.93.100</find>
+      <find>String</find>
+      <find>1000</find>
+      <find>add</find>
+      <find>localip</find>
+      <find>10.3.93.31</find>
+      <find>start</find>
+      <find>intervalOfPerTime</find>
+      <find>getTerminalList</find>
+      <find>最大时延</find>
+      <find>getDataLength</find>
+      <find>poi</find>
+      <find>valueMap</find>
+      <find>10.3.10.4</find>
+      <find>127</find>
+      <find>时延</find>
+      <find>2</find>
+      <find>127.0.0.1</find>
+      <find>10.3.93.70</find>
+      <find>$json</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>10.3.93.87</replace>
+      <replace>169.254.80.55</replace>
+      <replace>10.3.93.100</replace>
+      <replace>10.3.93.70</replace>
+      <replace>127.0.0.1</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/analog/src/main/java/com/potevio/analog</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/websocketdemo/src/main/java/com/fs/websocketdemo/controller/WebSocketController.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/dao/ExcelDao.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/config/WebSocketConfig.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/ws/MyWebSocket.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/resources/pages/myhtml.html" />
+        <option value="$PROJECT_DIR$/analog/src/main/resources/static/pages/myhtml.html" />
+        <option value="$PROJECT_DIR$/websocketdemo/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/config/SubscriberConfig.java" />
+        <option value="$PROJECT_DIR$/thymeleafdemo/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/thymeleafdemo/pom.xml" />
+        <option value="$PROJECT_DIR$/thymeleafdemo/src/main/resources/templates/result.html" />
+        <option value="$PROJECT_DIR$/thymeleafdemo/src/main/resources/static/mystatic.html" />
+        <option value="$PROJECT_DIR$/thymeleafdemo/src/main/java/com/fs/thymeleafdemo/controller/TestController.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/resources/templates/mainpage.html" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/IpUtil.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/config/Swagger2Config.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/entity/PageResult.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/entity/Result.java" />
+        <option value="$PROJECT_DIR$/../nettyReformatted/src/main/java/com/potevio/handler/RedisSubscribeHandler.java" />
+        <option value="$PROJECT_DIR$/../nettyReformatted/pom.xml" />
+        <option value="$PROJECT_DIR$/../nettyReformatted/src/main/java/com/potevio/codec/TcpByteToMsgCodec.java" />
+        <option value="$PROJECT_DIR$/../nettyReformatted/src/main/java/com/potevio/handler/UdpInBoundFilterHandler.java" />
+        <option value="$PROJECT_DIR$/../nettyReformatted/src/main/java/com/potevio/handler/ContextObserverStartHandler.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/AnalogData.java" />
+        <option value="$PROJECT_DIR$/analog/src/test/java/com/potevio/analog/TestIp.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/controller/PageController.java" />
+        <option value="$USER_HOME$/Desktop/230latest/nettyReformatted/src/main/java/com/potevio/tasks/TcpTimerTask.java" />
+        <option value="$USER_HOME$/Desktop/230latest/nettyReformatted/pom.xml" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/IpComparator.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/RequestComparetor3.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/RequestComparetor2.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/RequestComparetor4.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/ExcelFileUtil.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/RequestOrderData.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/RequestComparetor.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/controller/ConfigController.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/resources/static/dianli/run.html" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/ExcelData.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/TerminalData.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/RealResponseData.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/dao/ExcelConfigDao.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/receiver/Receiver.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/resources/static/dianli/forms2.html" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/ConfigWrapperData.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/ConfigData.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/service/ConfigService.java" />
+        <option value="$PROJECT_DIR$/analog/pom.xml" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/controller/AnalogController.java" />
+        <option value="$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/service/AnalogService.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="analog" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="analog" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+    <option name="x" value="47" />
+    <option name="y" value="23" />
+    <option name="width" value="1233" />
+    <option name="height" value="777" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="TestAnalog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAnalog" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAnalog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAnalog" type="462c0819:PsiDirectoryNode" />
+              <item name="analog" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAnalog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAnalog" type="462c0819:PsiDirectoryNode" />
+              <item name="analog" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAnalog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAnalog" type="462c0819:PsiDirectoryNode" />
+              <item name="analog" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAnalog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAnalog" type="462c0819:PsiDirectoryNode" />
+              <item name="analog" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAnalog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAnalog" type="462c0819:PsiDirectoryNode" />
+              <item name="analog" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="analog" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAnalog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAnalog" type="462c0819:PsiDirectoryNode" />
+              <item name="analog" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAnalog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAnalog" type="462c0819:PsiDirectoryNode" />
+              <item name="analog" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAnalog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAnalog" type="462c0819:PsiDirectoryNode" />
+              <item name="analog" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="dianli" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAnalog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAnalog" type="462c0819:PsiDirectoryNode" />
+              <item name="analog" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAnalog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557476185661" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/analog/target" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.3314231" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/analog/target" />
+      <recent name="$PROJECT_DIR$/analog/src/main/resources/static/dianli" />
+      <recent name="$PROJECT_DIR$/analog/src/main/resources/templates" />
+      <recent name="$PROJECT_DIR$/analog/src/main/resources" />
+      <recent name="$PROJECT_DIR$/analog/src/main/resources/static/dianli/js" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.potevio.analog.util" />
+      <recent name="com.potevio.analog.entity" />
+      <recent name="com.potevio.analog.ws" />
+      <recent name="com.potevio.analog.config" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/analog/src/main/resources/static/page" />
+      <recent name="$PROJECT_DIR$/analog/src/main/resources/static" />
+      <recent name="$PROJECT_DIR$/analog/src/main/resources/templates" />
+      <recent name="$PROJECT_DIR$/analog/src/main/resources" />
+      <recent name="$PROJECT_DIR$/websocketdemo/src/main/resources/static/pages" />
+    </key>
+  </component>
+  <component name="RestServicesNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="Found 23 services " type="fcff1e1b:RestServiceStructure$RootNode" />
+        </path>
+        <path>
+          <item name="Found 23 services " type="fcff1e1b:RestServiceStructure$RootNode" />
+          <item name="analog" type="c588b436:RestServiceStructure$ProjectNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+    <option name="contentProportion" value="0.18969958" />
+  </component>
+  <component name="RunManager" selected="Spring Boot.AnalogApplication">
+    <configuration name="ApplicationMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.potevio.main.ApplicationMain" />
+      <module name="nettyReformatted" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.potevio.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestIp.testIp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="analog" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.potevio.analog.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.potevio.analog" />
+      <option name="MAIN_CLASS_NAME" value="com.potevio.analog.TestIp" />
+      <option name="METHOD_NAME" value="testIp" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AnalogApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="analog" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.potevio.analog.AnalogApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ApplicationMain" />
+        <item itemvalue="JUnit.TestIp.testIp" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="53da6441-5a27-448b-98f7-8661ee3dc7e2" name="Default Changelist" comment="" />
+      <created>1552632712390</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1552632712390</updated>
+      <workItem from="1552632714901" duration="5843000" />
+      <workItem from="1553150356564" duration="25992000" />
+      <workItem from="1553476264957" duration="38070000" />
+      <workItem from="1553734557212" duration="6765000" />
+      <workItem from="1554079907240" duration="1143000" />
+      <workItem from="1554191165971" duration="4432000" />
+      <workItem from="1554278228606" duration="1624000" />
+      <workItem from="1554348184076" duration="12000" />
+      <workItem from="1554701494571" duration="25231000" />
+      <workItem from="1555054103854" duration="5643000" />
+      <workItem from="1555119371480" duration="27566000" />
+      <workItem from="1555983211278" duration="11494000" />
+      <workItem from="1556068501111" duration="4332000" />
+      <workItem from="1556152832004" duration="6192000" />
+      <workItem from="1556239287529" duration="13047000" />
+      <workItem from="1557026677932" duration="86000" />
+      <workItem from="1557199371369" duration="590000" />
+      <workItem from="1557214398597" duration="713000" />
+      <workItem from="1557215125804" duration="3323000" />
+      <workItem from="1557304198062" duration="632000" />
+      <workItem from="1557310138902" duration="5342000" />
+      <workItem from="1557708279331" duration="59000" />
+      <workItem from="1557708389104" duration="693000" />
+      <workItem from="1557710305730" duration="10000" />
+      <workItem from="1557710356145" duration="34567000" />
+      <workItem from="1557995092895" duration="24829000" />
+      <workItem from="1558402902119" duration="155000" />
+      <workItem from="1558403125890" duration="17818000" />
+      <workItem from="1558946213253" duration="14196000" />
+      <workItem from="1559091841736" duration="505000" />
+      <workItem from="1559099963894" duration="2449000" />
+      <workItem from="1559180138911" duration="2147000" />
+      <workItem from="1559203674935" duration="52000" />
+      <workItem from="1559210684025" duration="585000" />
+      <workItem from="1559211322507" duration="166000" />
+      <workItem from="1559211520533" duration="555000" />
+      <workItem from="1559212100893" duration="323000" />
+      <workItem from="1559212908117" duration="292000" />
+      <workItem from="1559264160898" duration="4666000" />
+      <workItem from="1559271514616" duration="348000" />
+      <workItem from="1559271896701" duration="948000" />
+      <workItem from="1559281801979" duration="2103000" />
+      <workItem from="1559358387392" duration="347000" />
+      <workItem from="1559521864704" duration="3772000" />
+      <workItem from="1559609643233" duration="672000" />
+      <workItem from="1559704151971" duration="18015000" />
+      <workItem from="1560133222831" duration="4952000" />
+      <workItem from="1560156752071" duration="3000" />
+      <workItem from="1560218962788" duration="3464000" />
+      <workItem from="1560403852775" duration="76000" />
+      <workItem from="1560419615031" duration="25000" />
+    </task>
+    <task id="LOCAL-00001" summary="添加前端页面">
+      <created>1554275068198</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1554275068198</updated>
+    </task>
+    <task id="LOCAL-00002" summary="添加前端页面">
+      <created>1554275822160</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1554275822160</updated>
+    </task>
+    <task id="LOCAL-00003" summary="添加前端页面">
+      <created>1554276959546</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1554276959546</updated>
+    </task>
+    <task id="LOCAL-00004" summary="添加前端页面">
+      <created>1554277053718</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1554277053718</updated>
+    </task>
+    <task id="LOCAL-00005" summary="添加前端页面">
+      <created>1554277193228</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1554277193229</updated>
+    </task>
+    <task id="LOCAL-00006" summary="添加前端页面">
+      <created>1554277207964</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1554277207964</updated>
+    </task>
+    <task id="LOCAL-00007" summary="添加前端页面">
+      <created>1554278497122</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1554278497122</updated>
+    </task>
+    <task id="LOCAL-00008" summary="对接修改">
+      <created>1554885768726</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1554885768726</updated>
+    </task>
+    <task id="LOCAL-00009" summary="添加前端页面">
+      <created>1554885915918</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1554885915918</updated>
+    </task>
+    <task id="LOCAL-00010" summary="添加前端页面">
+      <created>1555665799914</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1555665799915</updated>
+    </task>
+    <task id="LOCAL-00011" summary="添加前端页面">
+      <created>1556007530174</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1556007530175</updated>
+    </task>
+    <task id="LOCAL-00012" summary="添加前端页面">
+      <created>1556007551137</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1556007551137</updated>
+    </task>
+    <task id="LOCAL-00013" summary="排序">
+      <created>1558334045268</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1558334045268</updated>
+    </task>
+    <task id="LOCAL-00014" summary="配置添加批延时">
+      <created>1558491958947</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1558491958947</updated>
+    </task>
+    <task id="LOCAL-00015" summary="添加前端页面">
+      <created>1559267888613</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1559267888613</updated>
+    </task>
+    <task id="LOCAL-00016" summary="添加前端页面">
+      <created>1559268020890</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1559268020890</updated>
+    </task>
+    <task id="LOCAL-00017" summary="添加前端页面">
+      <created>1559268082940</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1559268082940</updated>
+    </task>
+    <task id="LOCAL-00018" summary="添加前端页面">
+      <created>1559268137696</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1559268137696</updated>
+    </task>
+    <task id="LOCAL-00019" summary="添加前端页面">
+      <created>1559268273615</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1559268273615</updated>
+    </task>
+    <task id="LOCAL-00020" summary="添加前端页面">
+      <created>1559268385528</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1559268385528</updated>
+    </task>
+    <task id="LOCAL-00021" summary="添加前端页面">
+      <created>1559268405467</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1559268405467</updated>
+    </task>
+    <task id="LOCAL-00022" summary="添加前端页面">
+      <created>1559268465205</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1559268465205</updated>
+    </task>
+    <task id="LOCAL-00023" summary="添加前端页面">
+      <created>1559268485945</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1559268485945</updated>
+    </task>
+    <task id="LOCAL-00024" summary="添加前端页面">
+      <created>1559268505787</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1559268505787</updated>
+    </task>
+    <task id="LOCAL-00025" summary="添加前端页面">
+      <created>1559268540487</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1559268540487</updated>
+    </task>
+    <task id="LOCAL-00026" summary="添加前端页面">
+      <created>1559268764066</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1559268764067</updated>
+    </task>
+    <task id="LOCAL-00027" summary="添加前端页面">
+      <created>1559269855997</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1559269855997</updated>
+    </task>
+    <task id="LOCAL-00028" summary="添加前端页面">
+      <created>1559269895951</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1559269895951</updated>
+    </task>
+    <task id="LOCAL-00029" summary="添加前端页面">
+      <created>1559271032029</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1559271032029</updated>
+    </task>
+    <task id="LOCAL-00030" summary="添加前端页面">
+      <created>1559271058115</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1559271058115</updated>
+    </task>
+    <task id="LOCAL-00031" summary="测试中界面显示终端数量">
+      <created>1559292347209</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1559292347211</updated>
+    </task>
+    <task id="LOCAL-00032" summary="前端页面返回处理">
+      <created>1559532102264</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1559532102265</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="TestIp_testIp - 2019.04.12 at 17h 19m 03s.xml">
+      <configuration name="TestIp.testIp" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestIp_testIp - 2019.04.12 at 17h 20m 36s.xml">
+      <configuration name="TestIp.testIp" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestIp_testIp - 2019.04.12 at 17h 21m 39s.xml">
+      <configuration name="TestIp.testIp" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestIp_testIp - 2019.04.25 at 14h 58m 36s.xml">
+      <configuration name="TestIp.testIp" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestIp_testIp - 2019.04.25 at 15h 08m 52s.xml">
+      <configuration name="TestIp.testIp" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestIp_testIp - 2019.04.25 at 15h 09m 16s.xml">
+      <configuration name="TestIp.testIp" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestIp_testIp - 2019.04.25 at 15h 09m 33s.xml">
+      <configuration name="TestIp.testIp" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestIp_testIp - 2019.04.25 at 15h 09m 49s.xml">
+      <configuration name="TestIp.testIp" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestIp_testIp - 2019.04.25 at 15h 11m 09s.xml">
+      <configuration name="TestIp.testIp" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestIp_testIp - 2019.04.26 at 08h 54m 59s.xml">
+      <configuration name="TestIp.testIp" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="326864000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="47" y="23" width="1233" height="777" extended-state="0" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30394626" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="UI Designer" order="6" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49919224" weight="0.19726028" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49919224" weight="0.5589041" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32876712" />
+      <window_info anchor="bottom" id="Spring" order="7" weight="0.32876712" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32876712" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5016155" side_tool="true" weight="0.2739726" />
+      <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.32876712" />
+      <window_info anchor="bottom" id="Database Changes" order="12" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.3260274" />
+      <window_info anchor="bottom" id="Flutter Performance" order="14" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="15" weight="0.2" />
+      <window_info anchor="bottom" id="Run Dashboard" order="16" sideWeight="0.4983845" visible="true" weight="0.34306568" />
+      <window_info anchor="bottom" id="TypeScript" order="17" weight="0.32876712" />
+      <window_info anchor="bottom" id="SonarLint" order="18" />
+      <window_info anchor="bottom" id="SVN Repositories" order="19" weight="0.28356165" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24959612" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" visible="true" weight="0.27036104" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Flutter Inspector" order="5" />
+      <window_info anchor="right" id="BPMNPalette" order="6" />
+      <window_info anchor="right" id="Flutter Outline" order="7" weight="0.32928804" />
+      <window_info anchor="right" id="Database" order="8" />
+      <window_info anchor="right" id="Palette&#9;" order="9" />
+      <window_info anchor="right" id="Theme Preview" order="10" />
+      <window_info anchor="right" id="Bean Validation" order="11" weight="0.32928804" />
+      <window_info anchor="right" id="Capture Analysis" order="12" />
+      <window_info anchor="right" id="Jms Messenger" order="13" weight="0.32928804" />
+      <window_info anchor="right" id="SciView" order="14" weight="0.32928804" />
+      <window_info anchor="right" id="RestServices" order="15" weight="0.32928804" />
+      <window_info anchor="right" id="Redis Servers" order="16" weight="0.29159936" />
+      <window_info anchor="right" id="Key Promoter X" order="17" weight="0.32928804" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="对接修改" />
+    <MESSAGE value="排序" />
+    <MESSAGE value="配置添加批延时" />
+    <MESSAGE value="添加前端页面" />
+    <MESSAGE value="测试中界面显示终端数量" />
+    <MESSAGE value="前端页面返回处理" />
+    <option name="LAST_COMMIT_MESSAGE" value="前端页面返回处理" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" log-message="true" suspend="NONE" type="java-field">
+          <url>file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/entity/Result.java</url>
+          <line>8</line>
+          <properties field="flag" class="com.potevio.analog.entity.Result" />
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/RequestComparetor.java</url>
+          <line>104</line>
+          <properties />
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/Desktop/230latest/nettyReformatted/META-INF/MANIFEST.MF" />
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/IpComparator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/IpUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="51" column="23" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/RequestComparetor2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/RequestComparetor4.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="13" column="3" lean-forward="true" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/RequestComparetor3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="43">
+          <caret line="8" column="19" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding>
+            <element signature="e#958#959#0" expanded="true" />
+            <element signature="e#990#991#0" expanded="true" />
+            <element signature="e#1041#1042#0" expanded="true" />
+            <element signature="e#1083#1084#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/IdWorker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/src.zip!/java/lang/Object.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="62" column="33" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.5.RELEASE/spring-web-5.1.5.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1025">
+          <caret line="116" column="13" lean-forward="true" selection-start-line="116" selection-start-column="13" selection-end-line="116" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi-ooxml/4.0.1/poi-ooxml-4.0.1.jar!/org/apache/poi/xssf/usermodel/XSSFWorkbook.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="144" column="30" lean-forward="true" selection-start-line="144" selection-start-column="30" selection-end-line="144" selection-end-column="30" />
+          <folding>
+            <element signature="e#6276#6277#0" expanded="true" />
+            <element signature="e#6319#6320#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/ExcelUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1784">
+          <caret line="110" column="38" selection-start-line="110" selection-start-column="27" selection-end-line="110" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/ExcelFileUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="49" column="5" lean-forward="true" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1084#1085#0" expanded="true" />
+            <element signature="e#1128#1129#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi/4.0.1/poi-4.0.1.jar!/org/apache/poi/ss/usermodel/CellType.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/resources/static/dianli/css/datatables.min.css" />
+    <entry file="file://$PROJECT_DIR$/analog/src/main/resources/static/dianli/js/datatables.min.js" />
+    <entry file="file://$PROJECT_DIR$/analog/src/main/resources/static/dianli/DataTables/datatables.min.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.5.RELEASE/spring-web-5.1.5.RELEASE.jar!/org/springframework/web/bind/annotation/PathVariable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/resources/static/dianli/css/floatPanel.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/resources/static/dianli/js/floatPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/resources/templates/result.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/RealResponseData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="39" column="19" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/dao/ExcelConfigDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6">
+          <caret line="81" column="2" selection-start-line="81" selection-start-column="2" selection-end-line="81" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/mvnw.cmd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-642" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/TerminalData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/AnalogApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="redis://IedisURI?type=Terminal&amp;label=127.0.0.1&amp;host=127.0.0.1&amp;port=6379&amp;password=&amp;timestamp=1559211706954&amp;nodeHost=127.0.0.1&amp;nodePort=6379" />
+    <entry file="redis://IedisURI?type=Explorer&amp;label=127.0.0.1&amp;host=127.0.0.1&amp;port=6379&amp;password=&amp;timestamp=1559211706954&amp;nodeHost=127.0.0.1&amp;nodePort=6379" />
+    <entry file="redis://IedisURI?type=Explorer&amp;label=127.0.0.1&amp;host=127.0.0.1&amp;port=6379&amp;password=&amp;timestamp=1559212969441&amp;nodeHost=127.0.0.1&amp;nodePort=6379" />
+    <entry file="file://$PROJECT_DIR$/analog/src/main/resources/static/page/myhtml.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-619" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/resources/static/dianli/readMe.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="13" lean-forward="true" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestAnalog.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/ExcelData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-redis/2.1.5.RELEASE/spring-data-redis-2.1.5.RELEASE-sources.jar!/org/springframework/data/redis/core/RedisTemplate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="1241" column="46" selection-start-line="1241" selection-start-column="46" selection-end-line="1241" selection-end-column="46" />
+          <folding>
+            <element signature="e#38569#38570#0" expanded="true" />
+            <element signature="e#38616#38617#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/src.zip!/java/util/Collections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="173" column="27" selection-start-line="173" selection-start-column="27" selection-end-line="173" selection-end-column="27" />
+          <folding>
+            <element signature="e#7284#7285#0" expanded="true" />
+            <element signature="e#7312#7313#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/util/RequestComparetor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="32" selection-start-column="32" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1877#1878#0" expanded="true" />
+            <element signature="e#1909#1910#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="28" column="21" lean-forward="true" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+        </state>
+      </provider>
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="5" lean-forward="true" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/resources/static/dianli/run.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1697">
+          <caret line="396" column="21" lean-forward="true" selection-start-line="396" selection-start-column="21" selection-end-line="396" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/receiver/Receiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/service/ConfigService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/RequestOrderData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/controller/AnalogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="48" column="50" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/service/AnalogService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3015">
+          <caret line="220" column="15" selection-start-line="220" selection-start-column="15" selection-end-line="220" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/entity/Result.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/ConfigWrapperData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/ConfigData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/pojo/AnalogData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2630#2631#0" expanded="true" />
+            <element signature="e#2664#2665#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/java/com/potevio/analog/controller/ConfigController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="990">
+          <caret line="66" column="5" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analog/src/main/resources/static/dianli/forms2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="737" column="12" selection-start-line="737" selection-start-column="12" selection-end-line="737" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>TestAnalog:jar</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.3314231" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.3314231" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>analog</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.3314231" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>animal-sniffer-annotations-1.17</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.3314231" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

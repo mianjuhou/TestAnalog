@@ -76,13 +76,13 @@ public class AnalogService {
 //        Set<String> keys = redisTemplate.keys("*");
         List<AnalogData> analogs = new ArrayList<>();
         List<ConfigData> configs = configService.getAllConfig();
-        List<String> configIpList = new ArrayList<>();
+        List<String> configImsiList = new ArrayList<>();
         configs.forEach(config -> {
-            configIpList.addAll(config.getUeList());
+            configImsiList.addAll(config.getUeList().values());
         });
-        configIpList.forEach(ip -> {
-            if (redisTemplate.hasKey(ip)) {
-                List<String> list = ops.multiGet(ip, mlkeys);
+        configImsiList.forEach(imsi -> {
+            if (redisTemplate.hasKey(imsi)) {
+                List<String> list = ops.multiGet(imsi, mlkeys);
                 AnalogData analogData = new AnalogData();
                 analogData.setImsi(list.get(0));
                 analogData.setIp(list.get(1));
@@ -102,7 +102,7 @@ public class AnalogService {
         });
 //        keys.forEach(key -> {
 //            List<String> list = ops.multiGet(key, mlkeys);
-//            if (configIpList.contains(list.get(1))) {
+//            if (configImsiList.contains(list.get(1))) {
 //                AnalogData analogData = new AnalogData();
 //                analogData.setImsi(list.get(0));
 //                analogData.setIp(list.get(1));
@@ -216,9 +216,9 @@ public class AnalogService {
      * @return
      */
     public List<String> getStationDatas() {
-        if (!stationInfos.isEmpty()) {
-            return new ArrayList<>(stationInfos.keySet());
-        }
+//            if (!stationInfos.isEmpty()) {
+//                return new ArrayList<>(stationInfos.keySet());
+//            }
         Set<String> keys = redisTemplate.keys("*");
         HashOperations ops = redisTemplate.opsForHash();
         keys.forEach(key -> {
@@ -249,9 +249,9 @@ public class AnalogService {
      * @return
      */
     public List<TerminalData> getTerminalDatas(String stationId) {
-        if (stationInfos.keySet().contains(stationId)) {
-            return new ArrayList<>(stationInfos.get(stationId).values());
-        }
+//        if (stationInfos.keySet().contains(stationId)) {
+//            return new ArrayList<>(stationInfos.get(stationId).values());
+//        }
         Set<String> keys = redisTemplate.keys("*");
         HashOperations ops = redisTemplate.opsForHash();
         Map<String, TerminalData> terminalMap = new HashMap<>();
@@ -471,9 +471,9 @@ public class AnalogService {
         configs.forEach(config -> {
             RealResponseData realResponseData = config.obtainRealResponseData();
             List<AnalogData> analogs = new ArrayList<>();
-            config.getUeList().forEach(ip -> {
-                if (redisTemplate.hasKey(ip)) {
-                    List<String> list = ops.multiGet(ip, mlkeys);
+            config.getUeList().values().forEach(imsi -> {
+                if (redisTemplate.hasKey(imsi)) {
+                    List<String> list = ops.multiGet(imsi, mlkeys);
                     AnalogData analogData = new AnalogData();
                     analogData.setImsi(list.get(0));
                     analogData.setIp(list.get(1));
@@ -500,5 +500,10 @@ public class AnalogService {
             responses.add(realResponseData);
         });
         return responses;
+    }
+
+    public void clearAll() {
+//        stationInfos.clear();
+//        redisTemplate.getConnectionFactory().getConnection().flushAll();
     }
 }

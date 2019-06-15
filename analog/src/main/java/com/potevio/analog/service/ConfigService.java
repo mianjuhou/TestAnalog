@@ -9,11 +9,9 @@ import com.potevio.analog.pojo.ConfigData;
 import com.potevio.analog.pojo.ConfigWrapperData;
 import com.potevio.analog.pojo.ExcelData;
 import com.potevio.analog.util.*;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -29,7 +27,7 @@ public class ConfigService {
     public static final long INTERRUPTTIME = 120;//停止测试后到下一次可以测试的时间间隔
 
     @Autowired
-    private StringRedisTemplate stringRedisTemplate;
+    private RedisTemplate redisTemplate;
 
     @Autowired
     private AnalogService analogService;
@@ -58,14 +56,14 @@ public class ConfigService {
         data.setIsfilter("1");
         data.setId(idWorker.nextId() + "");
         data.setExpireTime("0");
-        List<String> ips = data.getUeList();
-        if (ips != null && !ips.isEmpty()) {
+        Map<String, String> oldMap = data.getUeList();
+        if (oldMap != null && !oldMap.isEmpty()) {
             //使用勾选方式，直接加到配置列表集合
             for (ConfigData oldconfig : configs) {
-                Iterator<String> it = ips.iterator();
+                Iterator<Map.Entry<String, String>> it = oldMap.entrySet().iterator();
                 while (it.hasNext()) {
-                    String newip = it.next();
-                    if (oldconfig.getUeList().contains(newip)) {
+                    Map.Entry<String, String> newip = it.next();
+                    if (oldconfig.getUeList().keySet().contains(newip.getKey())) {
                         if ("1".equals(data.getIsfilter())) {
                             it.remove();
                         } else {
@@ -74,8 +72,8 @@ public class ConfigService {
                     }
                 }
             }
-            if (!ips.isEmpty()) {
-                Collections.sort(data.getUeList(), new IpComparator());
+            if (!oldMap.isEmpty()) {
+//                Collections.sort(data.getUeList(), new IpComparator());
                 configs.add(data);
                 return configs;
             } else {
@@ -87,14 +85,14 @@ public class ConfigService {
             String endip = data.getEndip();
             long start = IpUtil.getIp2long(startip);
             long end = IpUtil.getIp2long2(endip);
-            List<String> newips = getValidIps2(start, end);
-            if (!newips.isEmpty()) {
+            Map<String, String> newMap = getValidIps2(start, end);
+            if (!newMap.isEmpty()) {
                 //判断新集合和已有集合是否有重合
                 for (ConfigData oldconfig : configs) {
-                    Iterator<String> it = newips.iterator();
+                    Iterator<Map.Entry<String, String>> it = newMap.entrySet().iterator();
                     while (it.hasNext()) {
-                        String newip = it.next();
-                        if (oldconfig.getUeList().contains(newip)) {
+                        Map.Entry<String, String> next = it.next();
+                        if (oldconfig.getUeList().keySet().contains(next.getKey())) {
                             if ("1".equals(data.getIsfilter())) {
                                 it.remove();
                             } else {
@@ -103,9 +101,9 @@ public class ConfigService {
                         }
                     }
                 }
-                if (!newips.isEmpty()) {
-                    Collections.sort(newips, new IpComparator());
-                    data.getUeList().addAll(newips);
+                if (!newMap.isEmpty()) {
+//                    Collections.sort(newMap.entrySet(), new IpComparator());
+                    data.getUeList().putAll(newMap);
                     configs.add(data);
                     return configs;
                 } else {
@@ -128,29 +126,20 @@ public class ConfigService {
         return newips;
     }
 
-    private List<String> getValidIps2(long ip1, long ip2) {
-        Long dbSize = stringRedisTemplate.getConnectionFactory().getConnection().dbSize();
+    private Map<String, String> getValidIps2(long ip1, long ip2) {
         long start = ip1 < ip2 ? ip1 : ip2;
         long end = ip1 >= ip2 ? ip1 : ip2;
-        List<String> newips = new ArrayList<>();
-        if (dbSize < (end - start) * 10) {
-            long finalStart = start;
-            Set<String> allIp = stringRedisTemplate.keys("*");
-            allIp.forEach(ip -> {
-                long now = IpUtil.ipToLong(ip);
-                if (now >= finalStart && now <= end) {
-                    newips.add(ip);
-                }
-            });
-        } else {
-            for (long i = start; i <= end; i++) {
-                String ip = IpUtil.longToIp(i);
-                if (stringRedisTemplate.hasKey(ip)) {
-                    newips.add(ip);
-                }
+        Set<String> allImsi = redisTemplate.keys("*");
+        HashOperations<String, String, String> ops = redisTemplate.opsForHash();
+        Map<String, String> map = new HashMap<>();
+        allImsi.forEach(imsi -> {
+            String ip = ops.get(imsi, "ip");
+            long now = IpUtil.ipToLong(ip);
+            if (now >= start && now <= end) {
+                map.put(ip, imsi);
             }
-        }
-        return newips;
+        });
+        return map;
     }
 
 
@@ -187,7 +176,7 @@ public class ConfigService {
         String json = JSON.toJSONString(configWrapper);
         //使用redis消息队列发送开始命令和配置数据
         System.out.println("开始测试：" + json);
-        stringRedisTemplate.convertAndSend("start_and_stop", json);
+        redisTemplate.convertAndSend("start_and_stop", json);
         return true;
     }
 
@@ -202,7 +191,7 @@ public class ConfigService {
         ConfigWrapperData configWrapper = new ConfigWrapperData();
         configWrapper.setType("stop_msg");
         String json = JSON.toJSONString(configWrapper);
-        stringRedisTemplate.convertAndSend("start_and_stop", json);
+        redisTemplate.convertAndSend("start_and_stop", json);
         System.out.println("停止测试");
         return true;
     }
@@ -219,10 +208,10 @@ public class ConfigService {
         map.put("avgDelay", "0");
         map.put("maxDelay", "0");
         map.put("lastDelay", "0");
-        HashOperations ops = stringRedisTemplate.opsForHash();
+        HashOperations ops = redisTemplate.opsForHash();
         configs.forEach(config -> {
-            config.getUeList().forEach(ip -> {
-                ops.putAll(ip, map);
+            config.getUeList().entrySet().forEach(entry -> {
+                ops.putAll(entry.getValue(), map);
             });
         });
     }

@@ -5,7 +5,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @ApiModel(value = "配置信息对象模型")
@@ -27,7 +29,7 @@ public class ConfigData {
     @ApiModelProperty(value = "配置的服务端IP,应对多网卡情况", notes = "配置的服务端IP,应对多网卡情况", required = true)
     private String ip;
     @ApiModelProperty(value = "终端ip列表，ip段选的方式也会生成次列表", notes = "终端ip列表，ip段选的方式也会生成次列表", required = false)
-    private List<String> ueList = new ArrayList<>();
+    private Map<String,String> ueList = new HashMap<>();
     @ApiModelProperty(value = "*召测长度*", required = true)
     private String callLength;
     @ApiModelProperty(value = "配置内分批处理时一批的数量", required = false)

@@ -213,7 +213,9 @@ footer{
 						 if(c<0){
 						 style="color:white";
 						 }
-						 $list=v.ueList;
+						 $.each(v.ueList,function(c1,v1){
+						 $list.push(c1);
+						 })
 						 $('#show').append("<fieldset title="+$list.toString()+"><legend>"+
 						 $type+"-上报个数"+v.numOfPktsPerTime+"-上报间隔"+v.intervalOfPerTime+"-上报周期"+v.intervalOfPerPkt+"-端口号"+v.portNum+"-数据长度"+v.dataLength+"-招测长度"+v.callLength+"-分批时延"+v.batchDelay+"-单批数量"+v.batchNum+"</legend><table title="+$list.toString()+" class='table'><thead style='"+style+"'><tr><th>终端ip</th><th>在线状态</th>	<th>测试状态</th><th>测试次数</th><th>应收包数</th><th>实收包数</th><th>平均时延</th><th>速度</th><th>最近时延</th><th>丢包数</th></tr></thead></table></fieldset>");//<th>丢包数</th>
 					
@@ -241,9 +243,11 @@ footer{
 			                 		flagg=true;
 			                 		//alert(4);
 									$("#testuenum").text("  "+myJson.data.length);
+									
 			                 	for(var i=0;i<myJson.data.length;i++){
-			                 		//alert(myJson.data[i]);
+			                 		
 			                 		var $ip=myJson.data[i].ip;
+									
 			                 		//alert(i+" "+now.attr('title')+"  "+$ip+"  "+now.attr('title').search($ip) )
 			                    	myJson.data[i]["lossPackNum"]=eval(myJson.data[i].pktReceivable+"-"+myJson.data[i].pktReceived);
 									if(now.attr('title').search($ip)>=0){
@@ -253,7 +257,7 @@ footer{
 			                    	 i=i-1;
 			                    	}
 			                 	}
-			                    
+			                    //console.log(myJson.data);
 			                    return myJson.data;}else
 			                    {
 			                    	alert(myJson.message);return false;

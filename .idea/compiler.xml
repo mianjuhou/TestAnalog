@@ -6,14 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="analog" />
         <module name="TestAnalog" />
-        <module name="thymeleafdemo" />
-        <module name="websocketdemo" />
+        <module name="analog" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="demo" target="1.8" />
+      <module name="nettyReformatted" target="1.8" />
+      <module name="thymeleafdemo" target="1.8" />
+      <module name="websocketdemo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
